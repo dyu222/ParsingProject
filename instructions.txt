@@ -1,0 +1,55 @@
+Assignment 2
+• Parse this well enough to support useful navigation.
+• “This” = recipes from one or more popular online
+recipe sites.
+• This means breaking “steps” as listed into individual
+actions or closely connected sets of actions.
+• Start by assuming imperative sentences are steps.
+• You may need to dive one level lower, to
+conjunctions of imperative clauses — but this isn’t
+clear, and it’s up to you.
+
+Assignment 2, cont’d
+• You need a data structure to support
+navigation forward and backward.
+• An array (or maybe a doubly linked list)
+would be a good choice.
+• Each element in the array will be an
+(annotated) step object.
+• You need to be able to get from the step
+object, first: What is the text of that step?
+
+Further Parsing
+To support question-answering, you need to annotate
+each step object with the following information:
+• The cooking action(s) of that step, which will be the
+verb(s).
+• The ingredient(s) of that step, which will be the direct
+object.
+• The tools, utensils, and other parameters (time,
+temperature), which will be indirect objects (objects
+of propositional phrases).
+
+Answering Questions
+• You will need these annotations to parameterize
+question-answering methods associated with queries.
+• It will probably make sense to have a simple type
+system — a semantic model — encompassing:
+cooking actions, ingredients, utensils, tools,
+parameters.
+• You will need a lexicon of words used in recipes
+corresponding to this simple semantic model.
+
+How?
+• Parsing: Regular expressions for ingredients;
+dependency parsing for actions/steps.
+• You can use an existing dependency parser off the
+shelf, or roll your own (the latter might be easier,
+actually).
+• Question answering: Parameterize queries to
+internal (ingredients list) and external (e.g.,
+YouTube) information sources.
+
+Assignment 2
+• Assignment 2 is due Sunday, November 19, at 9
+pm
