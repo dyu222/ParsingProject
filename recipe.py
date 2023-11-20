@@ -163,6 +163,17 @@ for i in range(1,20):
     ingredients.append(ingredient.lower())
 
 
+# https://www.google.com/search?q=how+to+preheat+oven 
+# https://www.youtube.com/results?search_query=how+to+preheat+oven 
+def external_knowledge(question):
+    question = question.split(' ').strip()
+    if "what" in question:
+        search_url = "https://www.google.com/search?q=" + "+".join(question)
+    if "how" in question:
+        search_url = "https://www.youtube.com/results?search_query=" + "+".join(question)
+    return(search_url)
+
+    
 
 
 def remove_leading_space(input_str):
