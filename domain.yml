@@ -2,9 +2,11 @@ version: "3.1"
 
 intents:
   - ask_recipe
-  - ask_ingredient
+  - ask_ingredients_list
+  - ask_ingredient_details
   - ask_how
-  - ask_step
+  - ask_next_step
+  - ask_previous_step
 
 entities:
   - dish_name
@@ -14,9 +16,11 @@ entities:
 
 actions:
   - action_search_recipe
-  - action_provide_ingredient_info
+  - action_provide_ingredients_list
+  - action_provide_ingredient_details
   - action_provide_explanation
-  - action_provide_direction
+  - action_provide_next_step
+  - action_provide_previous_step
 
 responses:
   utter_greet:
