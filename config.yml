@@ -27,6 +27,7 @@ pipeline:
     constrain_similarities: true
   - name: EntitySynonymMapper
   - name: CRFEntityExtractor
+    threshold: 0.1
   - name: ResponseSelector
     epochs: 100
     constrain_similarities: true

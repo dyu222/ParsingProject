@@ -1,0 +1,18 @@
+## intent: ask_recipe
+- How do I make [spaghetti carbonara](dish_name)?
+- Can you give me a recipe for [lasagna](dish_name)?
+- What is the recipe for [steak](dish_name)?
+- Can you teach me how to make [sausage](dish_name)?
+- How do you make [pizza](dish_name)?
+- I want to know how to cook [grilled chicken](dish_name)
+- Teach me how to make [beef carpaccio](dish_name)
+- How can I prepare a classic [spaghetti bolognese](dish_name)?
+- Please share the steps to make a [vegetarian lasagna](dish_name)
+- I'd like a recipe for a creamy [mushroom risotto](dish_name)
+- Show me how to cook a perfect [omelette](dish_name)
+- Can you give me instructions for making homemade [sushi rolls](dish_name)?
+- I want to make [chocolate chip cookies](dish_name). Can you help me with the recipe?
+- Teach me how to prepare a [Thai green curry](dish_name)
+- How do I bake a [red velvet cake](dish_name) from scratch?
+- What's the process for making a [margarita pizza](dish_name)?
+- Share the secrets to a delicious homemade [apple pie](dish_name)
