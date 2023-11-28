@@ -16,7 +16,6 @@ intents:
 entities:
   - dish_name
   - ingredient_name
-  - ingredient_amount
   - tool_name
   - method_name
 

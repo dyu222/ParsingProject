@@ -47,28 +47,28 @@ nlu:
 
 - intent: ask_recipe
   examples: |
-    - How do I make spaghetti carbonara?
-    - Can you give me a recipe for lasagna?
-    - What is the recipe for steak?
-    - Can you teach me how to make sausage?
-    - How do you make pizza?
-    - I want to know how to cook grilled chicken
-    - Teach me how to make beef carpaccio
-    - How can I prepare a classic spaghetti bolognese?
-    - Please share the steps to make a vegetarian lasagna
-    - I'd like a recipe for a creamy mushroom risotto
-    - Show me how to cook a perfect omelette
-    - Can you give me instructions for making homemade sushi rolls?
-    - I want to make chocolate chip cookies. Can you help me with the recipe?
-    - Teach me how to prepare a Thai green curry
-    - How do I bake a red velvet cake from scratch?
-    - What's the process for making a margarita pizza?
-    - Share the secrets to a delicious homemade apple pie
+    - How do I make [spaghetti carbonara](dish_name)?
+    - Can you give me a recipe for [lasagna](dish_name)?
+    - What is the recipe for [steak](dish_name)?
+    - Can you teach me how to make [sausage](dish_name)?
+    - How do you make [pizza](dish_name)?
+    - I want to know how to cook [grilled chicken](dish_name)
+    - Teach me how to make [beef carpaccio](dish_name)
+    - How can I prepare a classic [spaghetti bolognese](dish_name)?
+    - Please share the steps to make a [vegetarian lasagna](dish_name)
+    - I'd like a recipe for a creamy [mushroom risotto](dish_name)
+    - Show me how to cook a perfect [omelette](dish_name)
+    - Can you give me instructions for making homemade [sushi rolls](dish_name)?
+    - I want to make [chocolate chip cookies](dish_name). Can you help me with the recipe?
+    - Teach me how to prepare a [Thai green curry](dish_name)
+    - How do I bake a [red velvet cake](dish_name) from scratch?
+    - What's the process for making a [margarita pizza](dish_name)?
+    - Share the secrets to a delicious homemade [apple pie](dish_name)
 
 - intent: ask_ingredients_list
   examples: |
     - Show me the ingredients list
-    - What ingredients do I need for chicken Alfredo?
+    - What ingredients do I need for [chicken Alfredo](dish_name)?
     - What are the ingredients?
     - Can you list the ingredients for this dish?
     - Show me the ingredient list, please.
@@ -100,20 +100,21 @@ nlu:
 
 - intent: ask_ingredient_details
   examples: |
-    - How much of salt do I need?
-    - Tell me more about the chicken.
-    - What's the quantity of olive oil?
-    - Explain the use of garlic in the recipe.
-    - Clarify the amount of sugar required.
-    - Can you provide details about tomatoes?
-    - What's the preparation method for onions?
-    - Give me more information about the eggs.
-    - Describe the role of butter in the dish.
-    - What should I know about flour?
-    - I need more details about cheese.
-    - How to use basil in the recipe?
-    - Explain the use of vinegar.
+    - How much of [salt](ingredient_name) do I need?
+    - Tell me how much of the [vinegar](ingredient_name) I need.
+    - What's the quantity of [olive oil](ingredient_name)?
+    - Explain the use of [garlic](ingredient_name) in the recipe.
+    - Clarify the amount of [sugar](ingredient_name) required.
+    - Can you provide details about [tomatoes](ingredient_name)?
+    - How many [onions](ingredient_name) do I need?
+    - Give me more information about the [eggs](ingredient_name).
+    - Describe the role of [butter](ingredient_name) in the dish.
+    - What should I know about [flour](ingredient_name)?
+    - I need more details about [cheese](ingredient_name).
+    - How to use [basil](ingredient_name) in the recipe?
+    - Explain the use of [vinegar](ingredient_name).
 
+# Need to entity tag
 - intent: ask_how
   examples: |
     - How do I preheat the oven?
