@@ -67,15 +67,18 @@ class ActionSearchRecipe(Action):
 
        
 
-        recipe_details = "this will be the linkedlist recipe"
+        recipe_details = dish_head
+        message = "Okay, I find the recipe for " + dish_name + ".\n"
+        message += "Here are all the steps: \n"
+        message += instructions
 
         # This is how bot responds to the User
-        dispatcher.utter_message("Okay, I find the recipe for ", dish_name)
-        
+        dispatcher.utter_message(message)
+
 
         # This is how you track history
-        # return [SlotSet("recipe_details", recipe_details)]
-        return []
+        return [SlotSet("recipe_details", recipe_details)]
+        # return []
 
 
 class ActionProvideIngredientsList(Action):
