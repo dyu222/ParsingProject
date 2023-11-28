@@ -2,12 +2,32 @@ version: "3.1"
 
 rules:
 
-- rule: Say goodbye anytime the user says goodbye
+- rule: Offer help everytime the User greets
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Respond when User says bye
   steps:
   - intent: goodbye
   - action: utter_goodbye
 
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: Respond when User ends their question
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+  - intent: end
+  - action: utter_done
+
+- rule: Guide the User if confused
+  steps:
+  - intent: confused
+  - action: utter_question
+
+- rule: Respond happily when User gives thank
+  steps:
+  - intent: affirm
+  - action: utter_happy
+
+- rule: Prompt User when confused
+  steps:
+  - intent: deny
+  - action: utter_sorry

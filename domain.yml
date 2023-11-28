@@ -2,6 +2,8 @@ version: "3.1"
 
 intents:
   - greet
+  - goodbye
+  - end
   - affirm
   - deny
   - confused
@@ -16,8 +18,6 @@ intents:
 entities:
   - dish_name
   - ingredient_name
-  - tool_name
-  - method_name
 
 actions:
   - action_search_recipe
@@ -34,6 +34,9 @@ responses:
 
   utter_question:
   - text: "Ask me about a recipe you like!"
+
+  utter_sorry:
+  - text: "I am sorry for the confusion. How can I help?"
 
   utter_error:
   - text: "Sorry, we did not find the recipe. I recomend the Arrabiata!"

@@ -5,6 +5,9 @@ nlu:
   examples: |
     - hey
     - hello
+    - how r u
+    - how are you
+    - what are you up to
     - hi
     - hello there
     - good morning
@@ -17,23 +20,50 @@ nlu:
     - goodevening
     - good afternoon
 
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - stop
+    - bye now
+
+- intent: end
+  examples: |
+    - that's all I need
+    - thanks, that's all
+    - that's all
+    - that's it
+    - that's everything
+    - I'm done
+    - finished
+    - nothing else
+    - I'm finished for now
+    - no more questions
+    - I'm good
+    - that's all there is
+
 - intent: confused
   examples: |
-      - What do you do?
-      - What questions can I ask you?
-      - What can you help me with?
-      - What is your purpose?
-      - What can you do for me?
-      - What are you?
+    - what is this?
+    - ?
+    - what do you do?
+    - what questions can I ask you?
+    - what can you help me with?
+    - what is your purpose?
+    - what can you do for me?
+    - what are you?
 
 - intent: affirm
   examples: |
     - yes
-    - y
     - indeed
     - of course
     - that sounds good
     - correct
+    - ok that makes sense
+    - ok
+    - sure
+    - nice
 
 - intent: deny
   examples: |
