@@ -29,9 +29,16 @@ def get_entity(tracker):
         return tracker.latest_message["entities"][0]["entity"]
     else:
         return None
+def get_entity_value(tracker):
+    if "entities" in tracker.latest_message:
+        if tracker.latest_message["entities"]:
+            return tracker.latest_message["entities"][0]["value"]
+    else:
+        return None
 def get_intent(tracker):
     if "intent" in tracker.latest_message:
-        return tracker.latest_message["intent"]["name"]
+        if "name" in tracker.latest_message["intent"]:
+            return tracker.latest_message["intent"]["name"]
     else:
         return None
 
@@ -47,12 +54,22 @@ class ActionSearchRecipe(Action):
         # intent = tracker.latest_message["intent"].get("name")
         # intent = tracker.latest_message.get("entities").get("dish_name")
         # dispatcher.utter_message(intent)
-        for key,value in tracker.latest_message.items():
-            dispatcher.utter_message(key + " : " + str(value))
-
+        # for key,value in tracker.latest_message.items():
+        #     dispatcher.utter_message(key + " : " + str(value))
         # Implement logic to search for a recipe
         # and return the recipe details.
         # print("calling search recipe_______")
+        dish_name = get_entity_value(tracker)
+        dispatcher.utter_message("calling search recipe: " + dish_name)
+        #TODO: SHOULD PROBABLY HANDLE IF DISHNAME DOES NOT EXIST - idk if this ever happens or not
+        api_url = "https://themealdb.com/api/json/v1/1/search.php?s=" + str(dish_name)
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            recipe = response.json()['meals'][0]
+        else:
+            print(f"Error: {response.status_code}")
+            print("Sorry, we are not able to find the recipe for ", dish_name)
+            return []
         
         # # This is how you access extracted entities
         # dish_name = tracker.get_slot("dish_name")
@@ -68,35 +85,35 @@ class ActionSearchRecipe(Action):
         #     print("Sorry, we are not able to find the recipe for ", dish_name)
         #     return []
 
-        # # get info from recipe (json)
-        # instructions = re.split(r'\.\r\n|\.',recipe['strInstructions'])
-        # recipe_ingredients = {} #[]
-        # for i in range(1,20):
-        #     ingredient = recipe['strIngredient'+str(i)]
-        #     if ingredient == '' or ingredient == None:
-        #         continue
-        #     recipe_ingredients[ingredient.lower()] = recipe['strMeasure'+str(i)].lower()
+        # get info from recipe (json)
+        instructions = re.split(r'\.\r\n|\.',recipe['strInstructions'])
+        recipe_ingredients = {} #[]
+        for i in range(1,20):
+            ingredient = recipe['strIngredient'+str(i)]
+            if ingredient == '' or ingredient == None:
+                continue
+            recipe_ingredients[ingredient.lower()] = recipe['strMeasure'+str(i)].lower()
 
         # #initializing the recipe (linked list of step objects)
-        # dish_head = Step()
-        # prev_step = dish_head
-        # for instruction in instructions:
-        #     # print(instruction)
-        #     instruction = remove_leading_space(instruction)
-        #     curr_step = Step(instruction, recipe_ingredients, prev_step)
-        #     prev_step.next = curr_step
-        #     prev_step = curr_step
+        dish_head = Step()
+        prev_step = dish_head
+        for instruction in instructions:
+            # print(instruction)
+            instruction = remove_leading_space(instruction)
+            curr_step = Step(instruction, recipe_ingredients, prev_step)
+            prev_step.next = curr_step
+            prev_step = curr_step
 
        
 
-        # recipe_details = dish_head
-        # message = "Okay, I found the recipe for " + dish_name + ".\n"
-        # message += "Here are all the steps: \n"
-        # message += instructions
+        recipe_details = dish_head
+        message = "Okay, I found the recipe for " + dish_name + ".\n"
+        message += "Here are all the steps: \n"
+        message += instructions
 
         # # This is how bot responds to the User
-        # dispatcher.utter_message(message)
-        # current_step = dish_head.next
+        dispatcher.utter_message(message)
+        current_step = dish_head.next
 
 
         # # This is how you track history
