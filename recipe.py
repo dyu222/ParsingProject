@@ -1,6 +1,6 @@
 import requests
 import re
-import spacy
+# import spacy
 
 # Specify the URL of the API you want to call
 api_url = "https://themealdb.com/api/json/v1/1/search.php?s=Arrabiata"
@@ -274,13 +274,13 @@ for instruction in instructions:
 
 ###################################
 #printing text of steps, cooking actions of steps, etc.
-curr_step = head.next
-while curr_step.has_next_step():
-    curr_step.print_text() # can change to other methods like print_cooking_actions()
-    curr_step.print_ingredients()
-    curr_step.print_tools()
-    curr_step.print_utensils()
-    curr_step.print_methods()
-    curr_step.print_time()
-    curr_step.print_temperature()
-    curr_step = curr_step.next
+# curr_step = head.next
+# while curr_step.has_next_step():
+#     curr_step.print_text() # can change to other methods like print_cooking_actions()
+#     curr_step.print_ingredients()
+#     curr_step.print_tools()
+#     curr_step.print_utensils()
+#     curr_step.print_methods()
+#     curr_step.print_time()
+#     curr_step.print_temperature()
+#     curr_step = curr_step.next

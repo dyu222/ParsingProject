@@ -20,6 +20,8 @@ import requests
 # To make the fetched recipe accessible to all actions in your Rasa chatbot
 # Store the recipe information in the conversation's tracker.
 
+dish_head = None
+current_step = None
 
 class ActionSearchRecipe(Action):
     def name(self) -> Text:
@@ -30,12 +32,12 @@ class ActionSearchRecipe(Action):
     ) -> List[Dict[Text, Any]]:
         # Implement logic to search for a recipe
         # and return the recipe details.
-
+        print("calling search recipe_______")
         
         # This is how you access extracted entities
         dish_name = tracker.get_slot("dish_name")
         processed_dish_name = '+'.join([word.capitalize() for word in dish_name.split()])
-
+        print("!!!!!!!", processed_dish_name)
         #make api call
         api_url = "https://themealdb.com/api/json/v1/1/search.php?s=" + processed_dish_name
         response = requests.get(api_url)
@@ -43,7 +45,7 @@ class ActionSearchRecipe(Action):
             recipe = response.json()['meals'][0]
         else:
             print(f"Error: {response.status_code}")
-            print("Sorry, we are not abie to find the recipe for ", dish_name)
+            print("Sorry, we are not able to find the recipe for ", dish_name)
             return []
 
         # get info from recipe (json)
@@ -68,12 +70,13 @@ class ActionSearchRecipe(Action):
        
 
         recipe_details = dish_head
-        message = "Okay, I find the recipe for " + dish_name + ".\n"
+        message = "Okay, I found the recipe for " + dish_name + ".\n"
         message += "Here are all the steps: \n"
         message += instructions
 
         # This is how bot responds to the User
         dispatcher.utter_message(message)
+        current_step = dish_head.next
 
 
         # This is how you track history
@@ -81,6 +84,7 @@ class ActionSearchRecipe(Action):
         # return []
 
 
+# ask for the ingredient list of the whole recipe
 class ActionProvideIngredientsList(Action):
     def name(self) -> Text:
         return "action_provide_ingredients_list"
@@ -90,12 +94,18 @@ class ActionProvideIngredientsList(Action):
     ) -> List[Dict[Text, Any]]:
         # Implement logic to search for the ingredients list
         # and return the ingredient list details.
+        message = "You haven't told me what dish you want to cook today"
+        if dish_head != None:
+            message = list(dish_head.next.recipe_ingredients.keys())
+        dispatcher.utter_message(message)
+        
 
-        dispatcher.utter_message("User is asking for the ingredients list")
+        return [SlotSet("ingredients_list", message)]
 
-        return []
+#missing action: ask for the list of ingredients in a particular step
 
 
+#ask for the quantity of a particular ingredient at a particular step
 class ActionProvideIngredientDetails(Action):
     def name(self) -> Text:
         return "action_provide_ingredient_details"
@@ -105,11 +115,17 @@ class ActionProvideIngredientDetails(Action):
     ) -> List[Dict[Text, Any]]:
         # Implement logic to give the details on a particular ingredient
         # and return the ingredient's details.
+        ingredient_name = tracker.get_slot("ingredient_name")
+        message = "Sorry I don't know how much this ingredient should be."
+        if ingredient_name in current_step.recipe_ingredients:
+            measurement_string = current_step.recipe_ingredients[ingredient_name]
+            # parts = measurement_string.split('of', 1)
+            # m = parts[0].strip() if len(parts) > 0 else measurement_string.strip()
+            message = "You should put " + measurement_string
 
-        dispatcher.utter_message(
-            "User is asking for the an ingredient's detail")
+        dispatcher.utter_message(message)
 
-        return []
+        return [SlotSet("ingredient_detail", message)]
 
 
 class ActionProvideExplanation(Action):
