@@ -140,8 +140,6 @@ class Step:
         self.methods = []
         self.time = None
         self.temperature = None
-        
-        
         if text:
             self.parse(text.lower(), recipe_ingredients)
 
