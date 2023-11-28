@@ -18,98 +18,40 @@ else:
     print(f"Error: {response.status_code}")
 
 
-class Step:
-    def __init__(self, text=None, ingredients=None, p=None, n=None):
-        self.prev = p
-        self.next = n
-        self.text = text.lower() if text is not None else None
-        self.cooking_actions = []
-        self.ingredients = []
-        self.tools = []
-        self.utensils = []
-        self.time = []
-        self.temperature = []
-        if text:
-            self.parse(text.lower(), ingredients)
-
-    def has_next_step(self):
-        if self.next == None:
-            return False
-        return True
-
-    def print_text(self):
-        print(self.text)
-
-    def print_cooking_actions(self):
-        print(self.cooking_actions)
-
-    def print_ingredients(self):
-        print(self.ingredients)
-
-    def parse(self, text, ingredients):
-        # TODO: inplement this function, find following information
-        # self.cooking_actions = [] # verbs #done
-        # self.ingredients = [] #direct object #done
-        # self.tools = []
-        # self.utensils = []
-        # self.time = [] #optional
-        # self.temperature = [] #optional
-
-        # self.cooking_actions
-        spacy_model = spacy.load("en_core_web_sm")
-        spacy_output = spacy_model(text)
-        for token in spacy_output:
-            if token.pos_ == "VERB":
-                self.cooking_actions.append(token.text)
-
-        # self.ingredients
-        for ingredient in ingredients:
-            if ingredient in text:
-                self.ingredients.append(ingredient)
-
-        # more advanced classification on ingredients?
-        # noun_chunks_without_det = [" ".join(token.text for token in chunk if token.dep_ != "det") for chunk in spacy_output.noun_chunks]
-        # for chunk in noun_chunks_without_det:
-        #     self.ingredients.append(chunk)
-
-            # if chunk in utensils_lex:
-            #     self.utensils.append(chunk)
-            # if chunk in tools_lex:
-            #     self.tool.append(chunk)
 
 
 # some of these are generated from GPT/copilot. may need to sort them out more. unsure if we need to separate utensils and tools
-utensils_lex = {"fork", "spoon", "knife", "chopsticks", "spork", "tongs", "spatula", "ladle",
-                "peeler", "can opener", "pizza cutter", "cutter",
-                "measuring cups", "measuring spoons", "rolling pin", "mortar and pestle",
-                "potato masher", "pastry brush", "garlic press", "egg beater", "nutcracker",
-                "ice cream scoop", "basting brush", "corkscrew", "cheese slicer", "kitchen shears",
-                "strainer", "slotted spoon", "melon baller", "fish spatula", "potato peeler",
-                "rice paddle", "serrated knife", "meat tenderizer", "apple corer", "jalapeno corer",
-                "onion chopper", "egg separator", "turkey baster", "funnel", "basting syringe",
-                "pastry wheel", "zester", "salad spinner", "nutmeg grater", "bamboo skewers",
-                "soup ladle", "spaghetti server", "egg timer", "tomato slicer", "avocado slicer",
-                "corn stripper", "berry huller", "meat cleaver",
-                "corn holders", "bamboo steamers", "cherry pitter",
-                "oyster knife", "sushi mat", "bread lame", "slicer",
-                "dough scraper", "slicer", "nut chopper"}
+utensils_lex = {"fork", "spoon", "knife", "chopsticks", "spork", "tongs", "spatula", "ladle", 
+               "peeler", "can opener", "pizza cutter", "cutter",
+               "measuring cups", "measuring spoons", "rolling pin", "mortar and pestle", 
+               "potato masher", "pastry brush", "garlic press", "egg beater", "nutcracker", 
+               "ice cream scoop", "basting brush", "corkscrew", "cheese slicer", "kitchen shears", 
+               "strainer", "slotted spoon", "melon baller", "fish spatula", "potato peeler", 
+               "rice paddle", "serrated knife", "meat tenderizer", "apple corer", "jalapeno corer", 
+               "onion chopper", "egg separator", "turkey baster", "funnel", "basting syringe", 
+               "pastry wheel", "zester", "salad spinner", "nutmeg grater", "bamboo skewers", 
+               "soup ladle", "spaghetti server", "egg timer", "tomato slicer", "avocado slicer", 
+               "corn stripper", "berry huller", "meat cleaver",
+               "corn holders", "bamboo steamers", "cherry pitter", 
+               "oyster knife", "sushi mat", "bread lame", "slicer", 
+               "dough scraper", "slicer", "nut chopper"}
 
 tools_lex = {"pan", "grater", "whisk", "oven", "refrigerator", "stove", "sink", "pot", "bowl", "plate",
              "grill", "blender", "microwave", "toaster", "thermometer", "scale", "strainer", "colander", "grinder",
              "masher", "peeler", "rolling pin", "sifter", "ladle", "skillet", "wok", "saucepan", "crockpot", "slow cooker",
              "pressure cooker", "food processor", "cutting board", "baking sheet", "baking pan", "baking tray",
              "baking rack", "baking mold", "baking tin", "baking stone", "baking paper", "baking parchment",
-             "mixing bowl", "whisking bowl", "serving platter", "tongs", "ladle",
+             "mixing bowl", "whisking bowl", "serving platter", "tongs", "ladle", 
              "measuring cups", "measuring spoons", "timer", "pepper mill", "grill brush", "pastry brush",
              "frying pan", "pizza cutter", "ice cream scoop", "scooper", "garlic press", "bottle opener"}
 
-methods_lex = {"sauté", "broil", "boil", "bake", "fry", "roast", "grill", "simmer", "poach", "steam", "stew",
-               "braise", "sear", "pan-fry", "deep-fry", "stir-fry", "griddle", "blanch", "smoke", "pressure cook",
+methods_lex = {"sauté", "broil", "boil", "bake", "fry", "roast", "grill", "simmer", "poach", "steam", "stew", 
+               "braise", "sear", "pan-fry", "deep-fry", "stir-fry", "griddle", "blanch", "smoke", "pressure cook", 
                "slow cook", "sous vide", "marinate", "pickle", "brine", "dehydrate", "ferment", "toast", "roast",
-               "char-grill", "blacken", "flambé", "caramelize", "poêlé", "sweat", "confit", "reduce", "glaze",
-               "julienne", "puree", "parboil", "glaze", "blitz", "shallow-fry", "steam-fry", "flash-fry",
-               "steam-roast", "gratin", "coddle", "bain-marie", "macerate", "spherify", "infuse", "griddle",
-               "melt", "blowtorch", "baste", "gravy", "shuck", "fold", "knead", "deglaze", "whip", "beat"}
+               "char-grill", "blacken", "flambé", "caramelize", "poêlé", "sweat", "confit", "reduce", "glaze", 
+               "julienne", "puree", "parboil", "glaze", "blitz", "shallow-fry", "steam-fry", "flash-fry", 
+               "steam-roast", "gratin", "coddle", "bain-marie", "macerate", "spherify", "infuse", "griddle", 
+               "melt", "blowtorch", "baste", "gravy", "shuck", "fold", "knead", "deglaze", "whip", "beat", "cook"}
 
 ingredients_lex = {"salt", "pepper", "olive oil", "vegetable oil", "butter", "eggs", "milk", "sugar", "flour", "onion", "garlic",
                    "tomato", "chicken", "beef", "pork", "rice", "pasta", "potatoes", "carrots", "bell pepper",
@@ -153,27 +95,163 @@ ingredients_lex = {"salt", "pepper", "olive oil", "vegetable oil", "butter", "eg
                    "scallops", "calamari", "octopus", "clams", "mussels", "oysters", "squid", "abalone", "eel", "frog legs",
                    "snake", "rabbit", "venison", "elk", "bison", "buffalo", "boar", "kangaroo", "quail", "pigeon", "turtle",
                    "alligator", "snail", "escargot", "cactus", "bamboo shoots", "water chestnuts", "lotus root", "okra",
-                   "jicama", "chayote", "wasabi peas", "goji berries", "goldenberries", "black garlic", "kombu", "nori"}
+                   "jicama", "chayote", "wasabi peas", "goji berries", "goldenberries", "black garlic", "kombu", "nori", 
+                   "parmigiano-reggiano", "water", "red chile flakes", "seasoning", "sauce"}
 
-instructions = re.split(r'\.\r\n|\.', recipe['strInstructions'])
-ingredients = []
-for i in range(1, 20):
+
+
+def extract_time_information(input_string):
+    # Define a regular expression pattern for time intervals (e.g., "5 minutes")
+    time_pattern = re.compile(r'\b(\d+\s*(?:to|-)\s*\d+\s*(?:seconds?|minutes?|hours?|days?|weeks?|months?|years?)|\d+\s*(?:seconds?|minutes?|hours?|days?|weeks?|months?|years?))\b', re.IGNORECASE)
+    # Search for the pattern in the input string
+    match = re.search(time_pattern, input_string)
+    # Return True if a match is found, indicating the presence of time information
+    return match.group(1) if match else None
+
+
+def extract_temperature_information(input_string):
+    # Define a regular expression pattern for temperature (e.g., "25°C", "98.6°F")
+    temperature_pattern = re.compile(r'\b(\d+(?:\.\d+)?)\s*(degrees?)\s*([FC])\b', re.IGNORECASE)
+    
+    # Search for the pattern in the input string
+    match = re.search(temperature_pattern, input_string)
+    # Return the matched temperature information or None if no match is found
+    if match:
+        return match.group(1) 
+    
+    keywords = ['medium-high heat', 'medium-low heat', 'medium heat', 'low heat','high heat',  'boiling', 'warm', 'hot', 'cold', 'cool']
+    for keyword in keywords:
+        if keyword.lower() in input_string.lower():
+            return keyword
+    return None
+
+
+
+class Step:
+    def __init__(self, text = None, recipe_ingredients = None, p = None, n = None):
+        self.prev = p
+        self.next = n
+        self.text = text.lower() if text is not None else None
+        # self.cooking_actions = []
+        self.recipe_ingredients = recipe_ingredients
+        self.ingredients = []
+        self.tools = []
+        self.utensils = []
+        self.methods = []
+        self.time = None
+        self.temperature = None
+        
+        
+        if text:
+            self.parse(text.lower(), recipe_ingredients)
+
+    def has_next_step(self):
+        if self.next == None:
+            return False
+        return True
+
+    def print_text(self):
+        print(self.text)
+    def print_cooking_actions(self):
+        print(self.cooking_actions)
+    def print_ingredients(self):
+        print("ingredients: " , self.ingredients)
+    def print_tools(self):
+        if len(self.tools) != 0:
+            print("tools: " , self.tools)
+    def print_utensils(self):
+        if len(self.utensils) != 0:
+            print("utensils: " , self.utensils)
+    def print_methods(self):
+        if len(self.methods) != 0:
+            print("methods: " , self.methods)
+    def print_time(self):
+        if self.time:
+            print("time: ", self.time)
+    def print_temperature(self):
+        if self.temperature:
+            print("temperature: ", self.temperature)
+
+
+
+
+
+    def parse(self, text, ingredients):
+        #TODO: inplement this function, find following information
+        # self.cooking_actions = [] # verbs #done
+        # self.ingredients = [] #direct object #done
+        # self.tools = [] #done
+        # self.utensils = [] #done
+        # self.time = [] #optional #done
+        # self.temperature = [] #optional #done
+
+        #self.cooking_actions
+        # spacy_model = spacy.load("en_core_web_sm")
+        # spacy_output = spacy_model(text)
+        # for token in spacy_output:
+        #     if token.pos_ == "VERB":
+        #         self.cooking_actions.append(token.text)
+
+
+
+        # more advanced classification on ingredients?
+        # noun_chunks_without_det = [" ".join(token.text for token in chunk if token.dep_ != "det") for chunk in spacy_output.noun_chunks]
+        # for chunk in noun_chunks_without_det:
+        #     self.ingredients.append(chunk)
+        # self.ingredients
+        # for ingredient in ingredients_lex:
+        #     if ingredient in text:
+        #         self.ingredients.append(ingredient)
+        # print("in")
+        for ingredient in ingredients_lex:
+            if ingredient in text:
+                if ingredient in self.recipe_ingredients:
+                    quantified_ingredient = recipe_ingredients[ingredient] + ' of ' + ingredient
+                    self.ingredients.append(quantified_ingredient)
+                else:
+                    self.ingredients.append(ingredient)
+
+
+
+
+        for tool in tools_lex:
+            if tool in text:
+                self.tools.append(tool)
+
+        for utensil in utensils_lex:
+            if utensil in text:
+                self.utensils.append(utensil)
+
+        for method in methods_lex:
+            if method in text:
+                self.methods.append(method)
+
+        self.time = extract_time_information(text)
+        self.temperature = extract_temperature_information(text)
+
+        
+
+
+instructions = re.split(r'\.\r\n|\.',recipe['strInstructions'])
+recipe_ingredients = {} #[]
+for i in range(1,20):
     ingredient = recipe['strIngredient'+str(i)]
     if ingredient == '' or ingredient == None:
         continue
-    ingredients.append(ingredient.lower())
+    recipe_ingredients[ingredient.lower()] = recipe['strMeasure'+str(i)].lower()
 
 
-# https://www.google.com/search?q=how+to+preheat+oven
-# https://www.youtube.com/results?search_query=how+to+preheat+oven
+# https://www.google.com/search?q=how+to+preheat+oven 
+# https://www.youtube.com/results?search_query=how+to+preheat+oven 
 def external_knowledge(question):
     question = question.split(' ').strip()
     if "what" in question:
         search_url = "https://www.google.com/search?q=" + "+".join(question)
     if "how" in question:
-        search_url = "https://www.youtube.com/results?search_query=" + \
-            "+".join(question)
-    return (search_url)
+        search_url = "https://www.youtube.com/results?search_query=" + "+".join(question)
+    return(search_url)
+
+    
 
 
 def remove_leading_space(input_str):
@@ -183,23 +261,28 @@ def remove_leading_space(input_str):
         return input_str
 
 
+
 head = Step()
 prev_step = head
 for instruction in instructions:
     # print(instruction)
     instruction = remove_leading_space(instruction)
-    curr_step = Step(instruction, ingredients, prev_step)
+    curr_step = Step(instruction, recipe_ingredients, prev_step)
     prev_step.next = curr_step
     prev_step = curr_step
 
 
+
+
 ###################################
-# printing text of steps, cooking actions of steps, etc.
+#printing text of steps, cooking actions of steps, etc.
 curr_step = head.next
 while curr_step.has_next_step():
-    curr_step.print_text()  # can change to other methods like print_cooking_actions()
+    curr_step.print_text() # can change to other methods like print_cooking_actions()
     curr_step.print_ingredients()
+    curr_step.print_tools()
+    curr_step.print_utensils()
+    curr_step.print_methods()
+    curr_step.print_time()
+    curr_step.print_temperature()
     curr_step = curr_step.next
-
-if __name__ == "__main__":
-    
