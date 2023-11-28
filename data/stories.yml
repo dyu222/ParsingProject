@@ -59,7 +59,7 @@ stories:
   - intent: deny
   - action: utter_goodbye
 
-- story: User asks for clarification
+- story: User asks to repeat
   steps:
   - intent: greet
   - action: utter_greet

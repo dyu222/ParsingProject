@@ -7,10 +7,12 @@ intents:
   - ask_how
   - ask_next_step
   - ask_previous_step
+  - ask_repeat
 
 entities:
   - dish_name
   - ingredient_name
+  - ingredient_amount
   - tool_name
   - method_name
 
@@ -21,6 +23,7 @@ actions:
   - action_provide_explanation
   - action_provide_next_step
   - action_provide_previous_step
+  - action_repeat
 
 responses:
   utter_greet:

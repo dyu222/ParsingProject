@@ -79,7 +79,6 @@ nlu:
     - How do I sauté vegetables properly?
     - What's the best way to chop onions without tearing up?
     - Can you explain how to julienne carrots?
-    - I'm confused about folding ingredients. Can you clarify?
     - How do I know when a cake is done baking?
     - Explain the difference between baking soda and baking powder.
     - What's the correct way to season a cast-iron skillet?
@@ -140,10 +139,9 @@ nlu:
   examples: |
     - What is the previous step?
     - Go back
-    - Wait
     - What was the step before this one?
     - Can you go back to the previous instruction?
-    - How do I undo the last step?
+    - How do I do the last step?
     - Take me back one step, please.
     - I want to review the previous action.
     - And before this?
@@ -171,4 +169,34 @@ nlu:
     - What happened in the previous stage?
     - Can I see the step before this one?
     - How do I go back to the last action?
+
+- intent: ask_repeat
+  examples: |
+    - Wait what do I do again?
+    - Can you give me the step again?
+    - Can you explain this again?
+    - Can you show me this again?
+    - Repeat the step, please.
+    - Repeat
+    - Again 
+    - Repeat please
+    - Again please
+    - I didn't catch that. Can you repeat it?
+    - Please explain it again.
+    - Can you go over that one more time?
+    - I need to hear that step again.
+    - I'm a bit confused.
+    - What was the last thing you said? Repeat it, please.
+    - I didn't quite get it. Say it again, please.
+    - Can you repeat the instruction?
+    - Could you clarify that step?
+    - Can you repeat?
+    - I'm lost. Can you go through it one more time?
+    - Im lost
+    - Can you explain it again?
+    - Can you show me that again?
+    - I'm having trouble following. Repeat the step, please.
+    - I'm struggling to remember. Explain it again.
+    - I'm a bit confused. Can you provide a recap?
+
 
