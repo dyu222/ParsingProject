@@ -1,6 +1,47 @@
 version: "3.1"
 
 nlu:
+- intent: ask_recipe
+  examples: |
+    - How do I make [spaghetti carbonara](dish_name)?
+    - Can you give me a recipe for [lasagna](dish_name)?
+    - What is the recipe for [steak](dish_name)?
+    - Can you teach me how to make [sausage](dish_name)?
+    - How do you make [pizza](dish_name)?
+    - I want to know how to cook [grilled chicken](dish_name)
+    - Teach me how to make [beef carpaccio](dish_name)
+    - How can I prepare a classic [spaghetti bolognese](dish_name)?
+    - Please share the steps to make a [vegetarian lasagna](dish_name)
+    - I'd like a recipe for a creamy [mushroom risotto](dish_name)
+    - Show me how to cook a perfect [omelette](dish_name)
+    - Can you give me instructions for making homemade [sushi rolls](dish_name)?
+    - I want to make [chocolate chip cookies](dish_name). Can you help me with the recipe?
+    - Teach me how to prepare a [Thai green curry](dish_name)
+    - How do I bake a [red velvet cake](dish_name) from scratch?
+    - What's the process for making a [margarita pizza](dish_name)?
+    - Share the secrets to a delicious homemade [apple pie](dish_name)
+    - Help me make [beef wellington](dish_name)?
+    - Help me cook [dumplings](dish_name)?
+    - Let's make a [margherita pizza](dish_name)?
+    - [Butter chicken](dish_name) is my favorite dish. Can you teach me how to make it?
+
+- intent: ask_ingredient_details
+  examples: |
+    - How much of [salt](ingredient_name) do I need?
+    - How much [pepper](ingredient_name)?
+    - Tell me how much of the [vinegar](ingredient_name) I need.
+    - What's the quantity of [olive oil](ingredient_name)?
+    - Explain the use of [garlic](ingredient_name) in the recipe.
+    - Clarify the amount of [sugar](ingredient_name) required.
+    - Can you provide details about [tomatoes](ingredient_name)?
+    - How many [onions](ingredient_name) do I need?
+    - Give me more information about the [eggs](ingredient_name).
+    - Describe the role of [butter](ingredient_name) in the dish.
+    - What should I know about [flour](ingredient_name)?
+    - I need more details about [cheese](ingredient_name).
+    - How to use [basil](ingredient_name) in the recipe?
+    - Explain the use of [vinegar](ingredient_name).
+
 - intent: greet
   examples: |
     - hey
@@ -12,12 +53,11 @@ nlu:
     - hello there
     - good morning
     - good evening
-    - moin
+    - goodmorning
+    - goodevening
     - hey there
     - let's go
     - hey dude
-    - goodmorning
-    - goodevening
     - good afternoon
 
 - intent: goodbye
@@ -26,6 +66,9 @@ nlu:
     - goodbye
     - stop
     - bye now
+    - see you later
+    - that's all
+    - farewell
 
 - intent: end
   examples: |
@@ -36,6 +79,7 @@ nlu:
     - that's everything
     - I'm done
     - finished
+    - I'm finished
     - nothing else
     - I'm finished for now
     - no more questions
@@ -46,12 +90,16 @@ nlu:
   examples: |
     - what is this?
     - ?
+    - ??
     - what do you do?
     - what questions can I ask you?
     - what can you help me with?
     - what is your purpose?
     - what can you do for me?
     - what are you?
+    - what do you mean?
+    - what
+    - i don't understand
 
 - intent: affirm
   examples: |
@@ -74,26 +122,8 @@ nlu:
     - don't like that
     - no way
     - not really
-
-- intent: ask_recipe
-  examples: |
-    - How do I make [spaghetti carbonara](dish_name)?
-    - Can you give me a recipe for [lasagna](dish_name)?
-    - What is the recipe for [steak](dish_name)?
-    - Can you teach me how to make [sausage](dish_name)?
-    - How do you make [pizza](dish_name)?
-    - I want to know how to cook [grilled chicken](dish_name)
-    - Teach me how to make [beef carpaccio](dish_name)
-    - How can I prepare a classic [spaghetti bolognese](dish_name)?
-    - Please share the steps to make a [vegetarian lasagna](dish_name)
-    - I'd like a recipe for a creamy [mushroom risotto](dish_name)
-    - Show me how to cook a perfect [omelette](dish_name)
-    - Can you give me instructions for making homemade [sushi rolls](dish_name)?
-    - I want to make [chocolate chip cookies](dish_name). Can you help me with the recipe?
-    - Teach me how to prepare a [Thai green curry](dish_name)
-    - How do I bake a [red velvet cake](dish_name) from scratch?
-    - What's the process for making a [margarita pizza](dish_name)?
-    - Share the secrets to a delicious homemade [apple pie](dish_name)
+    - nope
+    - nah
 
 - intent: ask_ingredients_list
   examples: |
@@ -127,22 +157,6 @@ nlu:
     - What are the items I need?
     - Can you tell me what I need to gather?
     - I want to know what ingredients are required.
-
-- intent: ask_ingredient_details
-  examples: |
-    - How much of [salt](ingredient_name) do I need?
-    - Tell me how much of the [vinegar](ingredient_name) I need.
-    - What's the quantity of [olive oil](ingredient_name)?
-    - Explain the use of [garlic](ingredient_name) in the recipe.
-    - Clarify the amount of [sugar](ingredient_name) required.
-    - Can you provide details about [tomatoes](ingredient_name)?
-    - How many [onions](ingredient_name) do I need?
-    - Give me more information about the [eggs](ingredient_name).
-    - Describe the role of [butter](ingredient_name) in the dish.
-    - What should I know about [flour](ingredient_name)?
-    - I need more details about [cheese](ingredient_name).
-    - How to use [basil](ingredient_name) in the recipe?
-    - Explain the use of [vinegar](ingredient_name).
 
 # Need to entity tag
 - intent: ask_how
