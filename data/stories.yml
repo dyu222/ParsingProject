@@ -2,69 +2,54 @@ version: "3.1"
 
 stories:
 
-- story: User asks for a recipe
+- story: User greets the bot
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+  - intent: confused
+  - action: utter_question
 
-- story: User asks about ingredients list
+- story: User is happy
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
   - intent: affirm
   - action: utter_happy
 
+- story: User is not happy
+  steps:
+  - intent: deny
+  - action: utter_did_that_help
+
+- story: User asks for a recipe
+  steps:
+  - intent: ask_recipe
+  - action: action_search_recipe
+
+- story: User asks about ingredients list
+  steps:
+  - intent: ask_ingredients_list
+  - action: action_provide_ingredients_list
+
 - story: User asks about an ingredient
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - intent: ask_ingredient_details
+  - action: action_provide_ingredient_details
 
 - story: User asks for help
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - intent: ask_how
+  - action: action_provide_explanation
 
 - story: User asks for next step
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - intent: ask_next_step
+  - action: action_provide_next_step
 
 - story: User asks for previous step
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - intent: ask_previous_step
+  - action: action_provide_previous_step
 
 - story: User asks to repeat
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - intent: ask_repeat
+  - action: action_repeat

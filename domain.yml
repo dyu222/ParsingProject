@@ -1,6 +1,10 @@
 version: "3.1"
 
 intents:
+  - greet
+  - affirm
+  - deny
+  - confused
   - ask_recipe
   - ask_ingredients_list
   - ask_ingredient_details
@@ -39,7 +43,7 @@ responses:
   - text: "Did that help you?"
 
   utter_happy:
-  - text: "Great, carry on!"
+  - text: "Great, I am glad that helped!"
 
   utter_goodbye:
   - text: "It was nice chatting with you!"
