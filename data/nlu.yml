@@ -78,6 +78,23 @@ nlu:
 - intent: ask_recipe
   examples: |
     - How do I make [spaghetti carbonara](dish_name)?
+    - Could you provide a recipe for chicken [tikka masala](dish_name)?
+    - I'm interested in making [banana bread](dish_name). Do you have a good recipe?
+    - What ingredients do I need for a [caesar salad](dish_name)?
+    - Can you help me with a recipe for [pumpkin soup](dish_name)?
+    - I'd like to try making [beef wellington](dish_name). Can you guide me?
+    - How do I prepare [ratatouille](dish_name)?
+    - What's the best way to make a [tiramisu](dish_name)?
+    - Can you show me how to bake [blueberry muffins](dish_name)?
+    - I'm looking for a recipe to make [lobster bisque](dish_name).
+    - How can I make [pad thai](dish_name) at home?
+    - I need a simple recipe for [quiche Lorraine](dish_name).
+    - Can you teach me how to prepare [fish and chips](dish_name)?
+    - I'd love to know how to cook [coq au vin](dish_name).
+    - Could you give me the steps for making [gazpacho](dish_name)?
+    - I'm craving [butternut squash risotto](dish_name). Do you have a recipe?
+    - How do I make a traditional [clam chowder](dish_name)?
+    - Can you provide a recipe for [pecan pie](dish_name)?
     - Can you give me a recipe for [lasagna](dish_name)?
     - What is the recipe for [steak](dish_name)?
     - Can you teach me how to make [sausage](dish_name)?

@@ -64,7 +64,7 @@ class ActionSearchRecipe(Action):
         # and return the recipe details.
         global dish_head
         message = f"""
-        Sorry, I ain't got this recipe.
+        Sorry, this recipe was not found.
         """
 
         # This is how you access extracted entities
@@ -77,7 +77,7 @@ class ActionSearchRecipe(Action):
                                        for word in dish_name.split()])
 
         message = f"""
-        Sorry, I ain't got this recipe from web.
+        Sorry, this recipe was not found online.
         """
 
         # make api call
@@ -88,12 +88,14 @@ class ActionSearchRecipe(Action):
                 dispatcher.utter_message(text=message)
                 return [SlotSet("recipe_details", None)]
             recipe = response.json()['meals'][0]
-            dispatcher.utter_message("calling search recipe: " + dish_name)
+            dispatcher.utter_message(
+                "Searching for " + dish_name + " recipe\n")
         else:
             # print(f"Error: {response.status_code}")
             # print("Sorry, we are not able to find the recipe for ", dish_name)
             dispatcher.utter_message(text=message)
-            return [SlotSet("recipe_details", None)]
+            # return [SlotSet("recipe_details", None)]
+            return []
 
         # get info from recipe (json)
         instructions = re.split(r'\.\r\n|\.', recipe['strInstructions'])
@@ -114,18 +116,14 @@ class ActionSearchRecipe(Action):
 
             # print(instruction)
             instruction = remove_leading_space(instruction)
-            instructions_text += (instruction + "\n")
+            instructions_text += ("\t" + instruction + "\n")
             curr_step = Step(instruction, recipe_ingredients, prev_step)
             prev_step.next = curr_step
             prev_step = curr_step
 
         # recipe_details = dish_head.to_dict()
 
-        message = f"""
-        Okay, I found the recipe for {dish_name}.
-        Here are all the steps:
-        {instructions_text}
-        """
+        message = f"""This is the recipe for {dish_name}.\nHere are all the steps:\n\n{instructions_text}\n"""
 
         # This is how bot responds to the User
         dispatcher.utter_message(text=message)
@@ -133,7 +131,7 @@ class ActionSearchRecipe(Action):
         current_step = dish_head.next
 
         # This is how you track history
-        return [SlotSet("recipe_details", None)]
+        return []
         # return [SlotSet("recipe_details", json.dumps(recipe_details))]
         # return []
 
@@ -161,6 +159,7 @@ class ActionProvideIngredientsList(Action):
                 message = "The ingredients are " + ", ".join(list(dish_head.next.recipe_ingredients))
         dispatcher.utter_message(message)
 
+        # return [SlotSet("ingredients_list", message)]
         return []
 
 # missing action: ask for the list of ingredients in a particular step -Katrina wants to do this
