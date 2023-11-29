@@ -62,7 +62,7 @@ class ActionSearchRecipe(Action):
     ) -> List[Dict[Text, Any]]:
         # Implement logic to search for a recipe
         # and return the recipe details.
-
+        global dish_head
         message = f"""
         Sorry, this recipe was not found.
         """
@@ -84,6 +84,9 @@ class ActionSearchRecipe(Action):
         api_url = "https://themealdb.com/api/json/v1/1/search.php?s=" + processed_dish_name
         response = requests.get(api_url)
         if response.status_code == 200:
+            if response.json()['meals'] == None: # throws an ERROR WHEN NOTHING IN 'meals
+                dispatcher.utter_message(text=message)
+                return [SlotSet("recipe_details", None)]
             recipe = response.json()['meals'][0]
             dispatcher.utter_message(
                 "Searching for " + dish_name + " recipe\n")
@@ -143,8 +146,11 @@ class ActionProvideIngredientsList(Action):
     ) -> List[Dict[Text, Any]]:
         # Implement logic to search for the ingredients list
         # and return the ingredient list details.
-        message = "Ask me about a recipe you want to learn!"
+        global dish_head
+        message = "You haven't told me what dish you want to cook today"
+        print("dish head: ", dish_head)
         if dish_head != None:
+            print("dish head.next: ", dish_head.next)
             message = list(dish_head.next.recipe_ingredients.keys())
         dispatcher.utter_message(message)
 
