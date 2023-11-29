@@ -19,7 +19,7 @@ entities:
   - dish_name
   - ingredient_name
 
-# slots: 
+# slots:
 #   recipe_details:
 #     type: text
 #     mappings:
