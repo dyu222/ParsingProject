@@ -102,7 +102,7 @@ ingredients_lex = {"salt", "pepper", "olive oil", "vegetable oil", "butter", "eg
 
 def extract_time_information(input_string):
     # Define a regular expression pattern for time intervals (e.g., "5 minutes")
-    time_pattern = re.compile(r'\b(\d+\s*(?:to|-)\s*\d+\s*(?:seconds?|minutes?|hours?|days?|weeks?|months?|years?)|\d+\s*(?:seconds?|minutes?|hours?|days?|weeks?|months?|years?))\b', re.IGNORECASE)
+    time_pattern = re.compile(r'\b(\d+\s*(?:to|-)\s*\d+\s*(?:seconds?|secs?|minutes?|mins?|hours?|days?|weeks?|months?|years?)|\d+\s*(?:seconds?|minutes?|hours?|days?|weeks?|months?|years?))\b', re.IGNORECASE)
     # Search for the pattern in the input string
     match = re.search(time_pattern, input_string)
     # Return True if a match is found, indicating the presence of time information

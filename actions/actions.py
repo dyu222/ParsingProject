@@ -147,7 +147,7 @@ class ActionProvideIngredientsList(Action):
         # Implement logic to search for the ingredients list
         # and return the ingredient list details.
         global dish_head
-        message = "You haven't told me what dish you want to cook today"
+        message = "You haven't told me what dish you want to cook today."
         # print("dish head: ", dish_head)
         if dish_head != None:
             # print("dish head.next: ", dish_head.next)
@@ -156,14 +156,32 @@ class ActionProvideIngredientsList(Action):
             if not ingredients:
                 message = "Sorry, I don't know what ingredients you need"
             else:
-                message = "The ingredients are " + ", ".join(list(dish_head.next.recipe_ingredients))
+                message = "The ingredients are " + ", ".join(ingredients)
         dispatcher.utter_message(message)
 
         # return [SlotSet("ingredients_list", message)]
         return []
 
-# missing action: ask for the list of ingredients in a particular step -Katrina wants to do this
+# ask for the list of ingredients in a particular step
+class ActionProvideIngredientInStep(Action):
+    def name(self) -> Text:
+        return "action_provide_ingredients_in_step"
 
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+
+        message = "Please select a recipe first!"
+        global dish_head
+        if dish_head != None:
+            message = "There are no ingredients in this step."
+            global current_step
+            ingredients = list(current_step.ingredients)
+            if not ingredients:
+                message = "Sorry, I don't know what ingredients you need"
+            else:
+                message = "Here are the ingredients in this step:\n" + ingredients
+        dispatcher.utter_message(message)
+        return []
 
 # ask for the quantity of a particular ingredient at a particular step
 class ActionProvideIngredientDetails(Action):
@@ -288,8 +306,49 @@ class ActionRepeat(Action):
     
 #missing action: 
 # take me to the nth step(use dish_head)
+
+
 # what temperature? -Katrina wants to do this
+
+class ActionTemperature(Action):
+    def name(self) -> Text:
+        return "action_repeat"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        message = "Please select a recipe first!"
+        if current_step != None:
+            temperature = current_step.temperature
+            if temperature == None:
+                message = "Sorry I don't know the temperature of this step."
+            else:
+                message = "The temperature should be " + temperature + ". "
+
+        dispatcher.utter_message(text=message)
+        return []
+
 # How long do I <specific technique>? -Katrina wants to do this
+class ActionTime(Action):
+    def name(self) -> Text:
+        return "action_repeat"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        message = "Please select a recipe first!"
+        if current_step != None:
+            time = current_step.time
+            if time == None:
+                message = "Sorry I don't know the time of this step."
+            else:
+                message = "The time should be " + time + ". "
+
+        dispatcher.utter_message(text=message)
+        return []
+
+
+
 # Simple "what is" questions ("What is a <tool being mentioned>?")
 # Specific "how to" questions ("How do I <specific technique>?")
 # Vague "how to" questions ("How do I do that?" – use conversation history to infer what “that” refers to)
