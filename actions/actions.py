@@ -116,7 +116,7 @@ class ActionSearchRecipe(Action):
 
             # print(instruction)
             instruction = remove_leading_space(instruction)
-            instructions_text += (instruction + "\n")
+            instructions_text += ("\t" + instruction + "\n")
             curr_step = Step(instruction, recipe_ingredients, prev_step)
             prev_step.next = curr_step
             prev_step = curr_step
