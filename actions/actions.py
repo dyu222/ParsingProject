@@ -122,6 +122,7 @@ class ActionSearchRecipe(Action):
 
         # This is how bot responds to the User
         dispatcher.utter_message(text = message)
+        global current_step
         current_step = dish_head.next
 
 
@@ -164,6 +165,10 @@ class ActionProvideIngredientDetails(Action):
         # and return the ingredient's details.
         ingredient_name = tracker.get_slot("ingredient_name")
         message = "Sorry I don't know how much this ingredient should be."
+        global current_step
+        if current_step == None:
+            dispatcher.utter_message(text = "Please select a recipe first!")
+            return []
         if ingredient_name in current_step.recipe_ingredients:
             measurement_string = current_step.recipe_ingredients[ingredient_name]
             # parts = measurement_string.split('of', 1)
@@ -203,8 +208,18 @@ class ActionProvideNextStep(Action):
 
         # Access the recipe details from the tracker's slot
         # recipe_details = tracker.get_slot("recipe_details")
+        global current_step
+        if current_step == None:
+            dispatcher.utter_message(text = "Please select a recipe first!")
+            return []
+        current_step = current_step.next #we are actually moving to the next step!
+        if current_step.text:
+            step_text = "The next step is: " + current_step.text
+        else:
+            step_text = "You've reached the end of the recipe! Congrats!"
+            current_step = current_step.prev
 
-        dispatcher.utter_message("User is asking for the next step")
+        dispatcher.utter_message(text = step_text)
 
         return []
 
@@ -222,8 +237,15 @@ class ActionProvidePreviousStep(Action):
 
         # Access the recipe details from the tracker's slot
         # recipe_details = tracker.get_slot("recipe_details")
+        if current_step == None:
+            dispatcher.utter_message(text = "Please select a recipe first!")
+            return []
+        if current_step.prev.text == None:
+            step_text = "There was no last step!"
+        else:
+            step_text = "The last step was: " + current_step.prev.text
 
-        dispatcher.utter_message("User is asking for the previous step")
+        dispatcher.utter_message(text = step_text)
 
         return []
 
@@ -240,7 +262,12 @@ class ActionRepeat(Action):
 
         # Access the recipe details from the tracker's slot
         # recipe_details = tracker.get_slot("recipe_details")
+        if current_step == None:
+            dispatcher.utter_message(text = "Please select a recipe first!")
+            return []
+        
+        step_text = "This step is: " + current_step.text
 
-        dispatcher.utter_message("User is asking to repeat the current step")
+        dispatcher.utter_message(text = step_text)
 
         return []
