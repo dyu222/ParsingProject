@@ -274,14 +274,14 @@ def remove_leading_space(input_str):
 
 
 
-head = Step()
-prev_step = head
-for instruction in instructions:
-    # print(instruction)
-    instruction = remove_leading_space(instruction)
-    curr_step = Step(instruction, recipe_ingredients, prev_step)
-    prev_step.next = curr_step
-    prev_step = curr_step
+# head = Step()
+# prev_step = head
+# for instruction in instructions:
+#     # print(instruction)
+#     instruction = remove_leading_space(instruction)
+#     curr_step = Step(instruction, recipe_ingredients, prev_step)
+#     prev_step.next = curr_step
+#     prev_step = curr_step
 
 
 

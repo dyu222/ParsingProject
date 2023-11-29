@@ -150,20 +150,20 @@ class ActionProvideIngredientsList(Action):
         # and return the ingredient list details.
         global dish_head
         message = "You haven't told me what dish you want to cook today"
-        print("dish head: ", dish_head)
+        # print("dish head: ", dish_head)
         if dish_head != None:
-            print("dish head.next: ", dish_head.next)
-            print(list(dish_head.next.recipe_ingredients))
+            # print("dish head.next: ", dish_head.next)
+            # print(list(dish_head.next.recipe_ingredients))
             ingredients = list(dish_head.next.recipe_ingredients)
             if not ingredients:
                 message = "Sorry, I don't know what ingredients you need"
             else:
-                message = "The ingredients are" + ", ".join(list(dish_head.next.recipe_ingredients))
+                message = "The ingredients are " + ", ".join(list(dish_head.next.recipe_ingredients))
         dispatcher.utter_message(message)
 
-        return [SlotSet("ingredients_list", message)]
+        return []
 
-# missing action: ask for the list of ingredients in a particular step
+# missing action: ask for the list of ingredients in a particular step -Katrina wants to do this
 
 
 # ask for the quantity of a particular ingredient at a particular step
@@ -176,8 +176,10 @@ class ActionProvideIngredientDetails(Action):
     ) -> List[Dict[Text, Any]]:
         # Implement logic to give the details on a particular ingredient
         # and return the ingredient's details.
-        ingredient_name = tracker.get_slot("ingredient_name")
-        message = "Sorry I don't know how much this ingredient should be."
+        # ingredient_name = tracker.get_slot("ingredient_name")
+        ingredient_name = get_entity_value(tracker)
+        if ingredient_name == None:
+            message = "Sorry I don't know how much of this ingredient you should put."
         global current_step
         if current_step == None:
             dispatcher.utter_message(text="Please select a recipe first!")
@@ -186,11 +188,11 @@ class ActionProvideIngredientDetails(Action):
             measurement_string = current_step.recipe_ingredients[ingredient_name]
             # parts = measurement_string.split('of', 1)
             # m = parts[0].strip() if len(parts) > 0 else measurement_string.strip()
-            message = "You should put " + measurement_string
+            message = "You should put " + measurement_string + " of " + ingredient_name
 
         dispatcher.utter_message(message)
 
-        return [SlotSet("ingredient_detail", message)]
+        return []
 
 
 class ActionProvideExplanation(Action):
@@ -284,3 +286,11 @@ class ActionRepeat(Action):
         dispatcher.utter_message(text=step_text)
 
         return []
+    
+#missing action: 
+# take me to the nth step(use dish_head)
+# what temperature? -Katrina wants to do this
+# How long do I <specific technique>? -Katrina wants to do this
+# Simple "what is" questions ("What is a <tool being mentioned>?")
+# Specific "how to" questions ("How do I <specific technique>?")
+# Vague "how to" questions ("How do I do that?" – use conversation history to infer what “that” refers to)
