@@ -291,4 +291,28 @@ nlu:
     - I'm struggling to remember. Explain it again.
     - I'm a bit confused. Can you provide a recap?
 
+- intent: ask_specific_step
+  examples: |
+      - What should I do in step [two](step_number:2) of the recipe?
+      - Can you explain step [four](step_number:4) in the process?
+      - What does step [three](step_number:3) involve in the guide?
+      - Could you detail what's in step [five](step_number:5) of the instructions?
+      - I'm stuck on step [six](step_number:6). What is it?
+      - Please explain step [2](step_number:2) again.
+      - I don't understand what to do in step [3](step_number:3).
+      - What is the [5th](step_number:5) step?
+      - What is step [7](step_number:7)?
+      - How do I complete step [eight](step_number:8)?
+      - Can you repeat what's in step [ten](step_number:10)?
+      - What's the procedure for step [11](step_number:11)?
+      - What do I need for step [fifteen](step_number:15)?
+      - What's the first thing to do in step [seventeen](step_number:17)?
+      - Can you clarify step [18](step_number:18)?
+      - What's the key focus in step [24](step_number:24)?
+      - What is the [6th](step_number:6) step?
+      - Can you explain step [7](step_number:7) in more detail?
+      - What's involved in step [eight](step_number:8) of the process?
+      - Describe step [9](step_number:9) for me.
+      - I'm unsure about step [10](step_number:10). Can you help?
+
 

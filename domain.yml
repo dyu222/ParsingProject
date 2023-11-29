@@ -14,17 +14,12 @@ intents:
   - ask_next_step
   - ask_previous_step
   - ask_repeat
+  - ask_specific_step
 
 entities:
   - dish_name
   - ingredient_name
-
-# slots:
-#   recipe_details:
-#     type: text
-#     mappings:
-#       - type: from_entity
-#         entity: recipe_details
+  - step_number
 
 actions:
   - action_search_recipe
@@ -34,6 +29,7 @@ actions:
   - action_provide_next_step
   - action_provide_previous_step
   - action_repeat
+  - action_specific_step
 
 responses:
   utter_greet:

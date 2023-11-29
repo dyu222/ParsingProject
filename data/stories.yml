@@ -43,3 +43,8 @@ stories:
   steps:
   - intent: ask_repeat
   - action: action_repeat
+
+- story: User asks for a specific step
+  steps:
+  - intent: ask_specific_step
+  - action: action_specific_step

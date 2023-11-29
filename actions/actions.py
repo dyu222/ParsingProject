@@ -84,7 +84,8 @@ class ActionSearchRecipe(Action):
         api_url = "https://themealdb.com/api/json/v1/1/search.php?s=" + processed_dish_name
         response = requests.get(api_url)
         if response.status_code == 200:
-            if response.json()['meals'] == None: # throws an ERROR WHEN NOTHING IN 'meals
+            # throws an ERROR WHEN NOTHING IN 'meals
+            if response.json()['meals'] == None:
                 dispatcher.utter_message(text=message)
                 return [SlotSet("recipe_details", None)]
             recipe = response.json()['meals'][0]
@@ -156,7 +157,8 @@ class ActionProvideIngredientsList(Action):
             if not ingredients:
                 message = "Sorry, I don't know what ingredients you need"
             else:
-                message = "The ingredients are " + ", ".join(list(dish_head.next.recipe_ingredients))
+                message = "The ingredients are " + \
+                    ", ".join(list(dish_head.next.recipe_ingredients))
         dispatcher.utter_message(message)
 
         # return [SlotSet("ingredients_list", message)]
@@ -194,6 +196,7 @@ class ActionProvideIngredientDetails(Action):
         return []
 
 
+# Derek will take this one
 class ActionProvideExplanation(Action):
     def name(self) -> Text:
         return "action_provide_explanation"
@@ -204,6 +207,10 @@ class ActionProvideExplanation(Action):
         # Implement logic to give external instructions on a question
         # and return the explanation or link or instructions
 
+        # logic:
+        # take the latest message and check to see if it contains this or that, and if the string is short enough (less than 5 words or smth)
+        # if this matches, then take the current step recipe details and return the google query url for it
+        # if this doesnt match, then take the detailed question and return the query for the specific question
         dispatcher.utter_message("User is asking for help")
 
         return []
@@ -230,7 +237,7 @@ class ActionProvideNextStep(Action):
         if current_step.text:
             step_text = "The next step is: " + current_step.text
         else:
-            step_text = "You've reached the end of the recipe! Congrats!"
+            step_text = "This is the entire recipe!"
             current_step = current_step.prev
 
         dispatcher.utter_message(text=step_text)
@@ -285,11 +292,24 @@ class ActionRepeat(Action):
         dispatcher.utter_message(text=step_text)
 
         return []
-    
-#missing action: 
-# take me to the nth step(use dish_head)
+
+
+class ActionSpecificStep(Action):
+    def name(self) -> Text:
+        return "action_specific_step"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        # Implement logic to get a specific step
+        # and return the specific step details
+        step_number = get_entity_value(tracker)
+
+        dispatcher.utter_message(
+            text=f"i am in action specific step{step_number}")
+
+        return []
+
+
 # what temperature? -Katrina wants to do this
 # How long do I <specific technique>? -Katrina wants to do this
-# Simple "what is" questions ("What is a <tool being mentioned>?")
-# Specific "how to" questions ("How do I <specific technique>?")
-# Vague "how to" questions ("How do I do that?" – use conversation history to infer what “that” refers to)
