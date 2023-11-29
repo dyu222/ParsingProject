@@ -163,7 +163,30 @@ class ActionProvideIngredientsList(Action):
         return []
 
 # missing action: ask for the list of ingredients in a particular step
+class ActionProvideIngredientsList(Action):
+    def name(self) -> Text:
+        return "action_provide_ingredients_list"
 
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        # Implement logic to search for the ingredients list
+        # and return the ingredient list details.
+        global dish_head
+        message = "You haven't told me what dish you want to cook today"
+        print("dish head: ", dish_head)
+        if dish_head != None:
+            print("dish head.next: ", dish_head.next)
+            print(list(dish_head.next.recipe_ingredients))
+            ingredients = list(dish_head.next.recipe_ingredients)
+            if not ingredients:
+                message = "Sorry, I don't know what ingredients you need"
+            else:
+                message = "The ingredients are" + ", ".join(list(dish_head.next.recipe_ingredients))
+        dispatcher.utter_message(message)
+
+        # return [SlotSet("ingredients_list", message)]
+        return []
 
 # ask for the quantity of a particular ingredient at a particular step
 class ActionProvideIngredientDetails(Action):
