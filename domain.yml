@@ -9,12 +9,16 @@ intents:
   - confused
   - ask_recipe
   - ask_ingredients_list
+  - ask_ingredients_in_step
   - ask_ingredient_details
   - ask_how
   - ask_next_step
   - ask_previous_step
   - ask_repeat
+  - ask_temperature
+  - ask_time
   - ask_specific_step
+
 
 entities:
   - dish_name
