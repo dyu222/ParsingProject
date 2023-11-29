@@ -19,12 +19,12 @@ entities:
   - dish_name
   - ingredient_name
 
-slots: 
-  recipe_details:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: recipe_details
+# slots: 
+#   recipe_details:
+#     type: text
+#     mappings:
+#       - type: from_entity
+#         entity: recipe_details
 
 actions:
   - action_search_recipe
