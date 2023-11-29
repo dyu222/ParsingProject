@@ -170,6 +170,20 @@ class Step:
         if self.temperature:
             print("temperature: ", self.temperature)
 
+    # def to_dict(self):
+    #     return {
+    #         'text': self.text,
+    #         'recipe_ingredients': self.recipe_ingredients,
+    #         'ingredients': self.ingredients,
+    #         'tools': self.tools,
+    #         'utensils': self.utensils,
+    #         'methods': self.methods,
+    #         'time': self.time,
+    #         'temperature': self.temperature,
+    #         'prev': None if self.prev is None else self.prev.to_dict(),
+    #         'next': None if self.next is None else self.next.to_dict()
+    #     }
+
 
 
 
@@ -204,7 +218,7 @@ class Step:
         for ingredient in ingredients_lex:
             if ingredient in text:
                 if ingredient in self.recipe_ingredients:
-                    quantified_ingredient = recipe_ingredients[ingredient] + ' of ' + ingredient
+                    quantified_ingredient = self.recipe_ingredients[ingredient] + ' of ' + ingredient
                     self.ingredients.append(quantified_ingredient)
                 else:
                     self.ingredients.append(ingredient)

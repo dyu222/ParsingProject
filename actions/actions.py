@@ -13,6 +13,7 @@ from recipe import Step, remove_leading_space
 
 import re
 import requests
+import json
 
 # Linked List Node Class
 # If the class is too long, extract to a different python file
@@ -32,21 +33,32 @@ class ActionSearchRecipe(Action):
     ) -> List[Dict[Text, Any]]:
         # Implement logic to search for a recipe
         # and return the recipe details.
-        print("calling search recipe_______")
-        
+
+        message = f"""
+        Sorry, I ain't got this recipe.
+        """
+
         # This is how you access extracted entities
         dish_name = tracker.get_slot("dish_name")
+        if not dish_name:
+            dispatcher.utter_message(text = message)
+            return [SlotSet("recipe_details", None)]
         processed_dish_name = '+'.join([word.capitalize() for word in dish_name.split()])
-        print("!!!!!!!", processed_dish_name)
+
+        message = f"""
+        Sorry, I ain't got this recipe from web.
+        """
+
         #make api call
         api_url = "https://themealdb.com/api/json/v1/1/search.php?s=" + processed_dish_name
         response = requests.get(api_url)
         if response.status_code == 200:
             recipe = response.json()['meals'][0]
         else:
-            print(f"Error: {response.status_code}")
-            print("Sorry, we are not able to find the recipe for ", dish_name)
-            return []
+            # print(f"Error: {response.status_code}")
+            # print("Sorry, we are not able to find the recipe for ", dish_name)
+            dispatcher.utter_message(text = message)
+            return [SlotSet("recipe_details", None)]
 
         # get info from recipe (json)
         instructions = re.split(r'\.\r\n|\.',recipe['strInstructions'])
@@ -60,27 +72,37 @@ class ActionSearchRecipe(Action):
         #initializing the recipe (linked list of step objects)
         dish_head = Step()
         prev_step = dish_head
+        instructions_text = ""
+
         for instruction in instructions:
+            
             # print(instruction)
             instruction = remove_leading_space(instruction)
+            instructions_text += (instruction + "\n")
             curr_step = Step(instruction, recipe_ingredients, prev_step)
             prev_step.next = curr_step
             prev_step = curr_step
 
-       
+        
+        
 
-        recipe_details = dish_head
-        message = "Okay, I found the recipe for " + dish_name + ".\n"
-        message += "Here are all the steps: \n"
-        message += instructions
+        # recipe_details = dish_head.to_dict()
+
+
+        message = f"""
+        Okay, I found the recipe for {dish_name}.
+        Here are all the steps:
+        {instructions_text}
+        """
 
         # This is how bot responds to the User
-        dispatcher.utter_message(message)
+        dispatcher.utter_message(text = message)
         current_step = dish_head.next
 
 
         # This is how you track history
-        return [SlotSet("recipe_details", recipe_details)]
+        return [SlotSet("recipe_details", None)]
+        # return [SlotSet("recipe_details", json.dumps(recipe_details))]
         # return []
 
 

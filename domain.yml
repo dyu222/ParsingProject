@@ -30,6 +30,11 @@ slots:
     mappings:
       - type: from_entity
         entity: ingredient_name
+  recipe_details:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: recipe_details
 
 actions:
   - action_search_recipe
@@ -42,31 +47,31 @@ actions:
 
 responses:
   utter_greet:
-  - text: "Hello! I'm your recipe assistant. How can I help you today?"
+    - text: "Hello! I'm your recipe assistant. How can I help you today?"
 
   utter_question:
-  - text: "Ask me about a recipe you like!"
+    - text: "Ask me about a recipe you like!"
 
   utter_sorry:
-  - text: "I am sorry for the confusion. How can I help?"
+    - text: "I am sorry for the confusion. How can I help?"
 
   utter_error:
-  - text: "Sorry, we did not find the recipe. I recomend the Arrabiata!"
+    - text: "Sorry, we did not find the recipe. I recomend the Arrabiata!"
 
   utter_did_that_help:
-  - text: "Did that help you?"
+    - text: "Did that help you?"
 
   utter_happy:
-  - text: "Great, I am glad that helped!"
+    - text: "Great, I am glad that helped!"
 
   utter_goodbye:
-  - text: "It was nice chatting with you!"
+    - text: "It was nice chatting with you!"
 
   utter_done:
-  - text: "That was the entire recipe! What else can I help you with?"
+    - text: "That was the entire recipe! What else can I help you with?"
 
   utter_iamabot:
-  - text: "I am a recipebot, happy to answer your questions!"
+    - text: "I am a recipebot, happy to answer your questions!"
 
 session_config:
   session_expiration_time: 60
