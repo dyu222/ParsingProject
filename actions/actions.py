@@ -24,6 +24,29 @@ import json
 dish_head = None
 current_step = None
 
+################################################################################
+#Some helpers:
+def get_entity(tracker):
+    if "entities" in tracker.latest_message:
+        return tracker.latest_message["entities"][0]["entity"]
+    else:
+        return None
+def get_entity_value(tracker):
+    if "entities" in tracker.latest_message:
+        if tracker.latest_message["entities"]:
+            return tracker.latest_message["entities"][0]["value"]
+    else:
+        return None
+def get_intent(tracker):
+    if "intent" in tracker.latest_message:
+        if "name" in tracker.latest_message["intent"]:
+            return tracker.latest_message["intent"]["name"]
+    else:
+        return None
+
+################################################################################
+
+
 class ActionSearchRecipe(Action):
     def name(self) -> Text:
         return "action_search_recipe"
@@ -39,7 +62,8 @@ class ActionSearchRecipe(Action):
         """
 
         # This is how you access extracted entities
-        dish_name = tracker.get_slot("dish_name")
+        # dish_name = tracker.get_slot("dish_name")
+        dish_name = get_entity_value(tracker)
         if not dish_name:
             dispatcher.utter_message(text = message)
             return [SlotSet("recipe_details", None)]
@@ -54,6 +78,7 @@ class ActionSearchRecipe(Action):
         response = requests.get(api_url)
         if response.status_code == 200:
             recipe = response.json()['meals'][0]
+            dispatcher.utter_message("calling search recipe: " + dish_name)
         else:
             # print(f"Error: {response.status_code}")
             # print("Sorry, we are not able to find the recipe for ", dish_name)
