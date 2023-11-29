@@ -151,7 +151,12 @@ class ActionProvideIngredientsList(Action):
         print("dish head: ", dish_head)
         if dish_head != None:
             print("dish head.next: ", dish_head.next)
-            message = list(dish_head.next.recipe_ingredients.keys())
+            print(list(dish_head.next.recipe_ingredients))
+            ingredients = list(dish_head.next.recipe_ingredients)
+            if not ingredients:
+                message = "Sorry, I don't know what ingredients you need"
+            else:
+                message = "The ingredients are" + ", ".join(list(dish_head.next.recipe_ingredients))
         dispatcher.utter_message(message)
 
         # return [SlotSet("ingredients_list", message)]
