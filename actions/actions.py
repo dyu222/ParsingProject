@@ -25,18 +25,24 @@ dish_head = None
 current_step = None
 
 ################################################################################
-#Some helpers:
+# Some helpers:
+
+
 def get_entity(tracker):
     if "entities" in tracker.latest_message:
         return tracker.latest_message["entities"][0]["entity"]
     else:
         return None
+
+
 def get_entity_value(tracker):
     if "entities" in tracker.latest_message:
         if tracker.latest_message["entities"]:
             return tracker.latest_message["entities"][0]["value"]
     else:
         return None
+
+
 def get_intent(tracker):
     if "intent" in tracker.latest_message:
         if "name" in tracker.latest_message["intent"]:
@@ -65,15 +71,16 @@ class ActionSearchRecipe(Action):
         # dish_name = tracker.get_slot("dish_name")
         dish_name = get_entity_value(tracker)
         if not dish_name:
-            dispatcher.utter_message(text = message)
+            dispatcher.utter_message(text=message)
             return [SlotSet("recipe_details", None)]
-        processed_dish_name = '+'.join([word.capitalize() for word in dish_name.split()])
+        processed_dish_name = '+'.join([word.capitalize()
+                                       for word in dish_name.split()])
 
         message = f"""
         Sorry, I ain't got this recipe from web.
         """
 
-        #make api call
+        # make api call
         api_url = "https://themealdb.com/api/json/v1/1/search.php?s=" + processed_dish_name
         response = requests.get(api_url)
         if response.status_code == 200:
@@ -82,25 +89,26 @@ class ActionSearchRecipe(Action):
         else:
             # print(f"Error: {response.status_code}")
             # print("Sorry, we are not able to find the recipe for ", dish_name)
-            dispatcher.utter_message(text = message)
+            dispatcher.utter_message(text=message)
             return [SlotSet("recipe_details", None)]
 
         # get info from recipe (json)
-        instructions = re.split(r'\.\r\n|\.',recipe['strInstructions'])
-        recipe_ingredients = {} #[]
-        for i in range(1,20):
+        instructions = re.split(r'\.\r\n|\.', recipe['strInstructions'])
+        recipe_ingredients = {}  # []
+        for i in range(1, 20):
             ingredient = recipe['strIngredient'+str(i)]
             if ingredient == '' or ingredient == None:
                 continue
-            recipe_ingredients[ingredient.lower()] = recipe['strMeasure'+str(i)].lower()
+            recipe_ingredients[ingredient.lower(
+            )] = recipe['strMeasure'+str(i)].lower()
 
-        #initializing the recipe (linked list of step objects)
+        # initializing the recipe (linked list of step objects)
         dish_head = Step()
         prev_step = dish_head
         instructions_text = ""
 
         for instruction in instructions:
-            
+
             # print(instruction)
             instruction = remove_leading_space(instruction)
             instructions_text += (instruction + "\n")
@@ -108,11 +116,7 @@ class ActionSearchRecipe(Action):
             prev_step.next = curr_step
             prev_step = curr_step
 
-        
-        
-
         # recipe_details = dish_head.to_dict()
-
 
         message = f"""
         Okay, I found the recipe for {dish_name}.
@@ -121,10 +125,9 @@ class ActionSearchRecipe(Action):
         """
 
         # This is how bot responds to the User
-        dispatcher.utter_message(text = message)
+        dispatcher.utter_message(text=message)
         global current_step
         current_step = dish_head.next
-
 
         # This is how you track history
         return [SlotSet("recipe_details", None)]
@@ -146,14 +149,13 @@ class ActionProvideIngredientsList(Action):
         if dish_head != None:
             message = list(dish_head.next.recipe_ingredients.keys())
         dispatcher.utter_message(message)
-        
 
         return [SlotSet("ingredients_list", message)]
 
-#missing action: ask for the list of ingredients in a particular step
+# missing action: ask for the list of ingredients in a particular step
 
 
-#ask for the quantity of a particular ingredient at a particular step
+# ask for the quantity of a particular ingredient at a particular step
 class ActionProvideIngredientDetails(Action):
     def name(self) -> Text:
         return "action_provide_ingredient_details"
@@ -167,7 +169,7 @@ class ActionProvideIngredientDetails(Action):
         message = "Sorry I don't know how much this ingredient should be."
         global current_step
         if current_step == None:
-            dispatcher.utter_message(text = "Please select a recipe first!")
+            dispatcher.utter_message(text="Please select a recipe first!")
             return []
         if ingredient_name in current_step.recipe_ingredients:
             measurement_string = current_step.recipe_ingredients[ingredient_name]
@@ -210,16 +212,16 @@ class ActionProvideNextStep(Action):
         # recipe_details = tracker.get_slot("recipe_details")
         global current_step
         if current_step == None:
-            dispatcher.utter_message(text = "Please select a recipe first!")
+            dispatcher.utter_message(text="Please select a recipe first!")
             return []
-        current_step = current_step.next #we are actually moving to the next step!
+        current_step = current_step.next  # we are actually moving to the next step!
         if current_step.text:
             step_text = "The next step is: " + current_step.text
         else:
             step_text = "You've reached the end of the recipe! Congrats!"
             current_step = current_step.prev
 
-        dispatcher.utter_message(text = step_text)
+        dispatcher.utter_message(text=step_text)
 
         return []
 
@@ -238,14 +240,14 @@ class ActionProvidePreviousStep(Action):
         # Access the recipe details from the tracker's slot
         # recipe_details = tracker.get_slot("recipe_details")
         if current_step == None:
-            dispatcher.utter_message(text = "Please select a recipe first!")
+            dispatcher.utter_message(text="Please select a recipe first!")
             return []
         if current_step.prev.text == None:
             step_text = "There was no last step!"
         else:
             step_text = "The last step was: " + current_step.prev.text
 
-        dispatcher.utter_message(text = step_text)
+        dispatcher.utter_message(text=step_text)
 
         return []
 
@@ -263,11 +265,11 @@ class ActionRepeat(Action):
         # Access the recipe details from the tracker's slot
         # recipe_details = tracker.get_slot("recipe_details")
         if current_step == None:
-            dispatcher.utter_message(text = "Please select a recipe first!")
+            dispatcher.utter_message(text="Please select a recipe first!")
             return []
-        
+
         step_text = "This step is: " + current_step.text
 
-        dispatcher.utter_message(text = step_text)
+        dispatcher.utter_message(text=step_text)
 
         return []
