@@ -163,13 +163,14 @@ class ActionProvideIngredientsList(Action):
         # return [SlotSet("ingredients_list", message)]
         return []
 
+
 # ask for the list of ingredients in a particular step
 class ActionProvideIngredientInStep(Action):
     def name(self) -> Text:
         return "action_provide_ingredients_in_step"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
-    ) -> List[Dict[Text, Any]]:
+            ) -> List[Dict[Text, Any]]:
 
         message = "Please select a recipe first!"
         global dish_head
@@ -183,6 +184,7 @@ class ActionProvideIngredientInStep(Action):
                 message = "Here are the ingredients in this step:\n" + ingredients
         dispatcher.utter_message(message)
         return []
+
 
 # ask for the quantity of a particular ingredient at a particular step
 class ActionProvideIngredientDetails(Action):
@@ -329,7 +331,6 @@ class ActionSpecificStep(Action):
 
 
 # what temperature? -Katrina wants to do this
-
 class ActionTemperature(Action):
     def name(self) -> Text:
         return "action_repeat"
@@ -347,6 +348,7 @@ class ActionTemperature(Action):
 
         dispatcher.utter_message(text=message)
         return []
+
 
 # How long do I <specific technique>? -Katrina wants to do this
 class ActionTime(Action):
@@ -366,9 +368,3 @@ class ActionTime(Action):
 
         dispatcher.utter_message(text=message)
         return []
-
-
-
-# Simple "what is" questions ("What is a <tool being mentioned>?")
-# Specific "how to" questions ("How do I <specific technique>?")
-# Vague "how to" questions ("How do I do that?" – use conversation history to infer what “that” refers to)

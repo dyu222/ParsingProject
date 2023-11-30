@@ -161,7 +161,6 @@ nlu:
     - How to use [basil](ingredient_name) in the recipe?
     - Explain the use of [vinegar](ingredient_name).
 
-# Need to entity tag
 - intent: ask_how
   examples: |
     - How do I preheat the oven?
