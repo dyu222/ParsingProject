@@ -1,297 +1,308 @@
 version: "3.1"
 
 nlu:
-- intent: greet
-  examples: |
-    - hey
-    - hello
-    - how r u
-    - how are you
-    - what are you up to
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+  - intent: greet
+    examples: |
+      - hey
+      - hello
+      - how r u
+      - how are you
+      - what are you up to
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - moin
+      - hey there
+      - let's go
+      - hey dude
+      - goodmorning
+      - goodevening
+      - good afternoon
 
-- intent: goodbye
-  examples: |
-    - bye
-    - goodbye
-    - stop
-    - bye now
+  - intent: goodbye
+    examples: |
+      - bye
+      - goodbye
+      - stop
+      - bye now
 
-- intent: end
-  examples: |
-    - that's all I need
-    - thanks, that's all
-    - that's all
-    - that's it
-    - that's everything
-    - I'm done
-    - finished
-    - nothing else
-    - I'm finished for now
-    - no more questions
-    - I'm good
-    - that's all there is
+  - intent: end
+    examples: |
+      - that's all I need
+      - thanks, that's all
+      - that's all
+      - that's it
+      - that's everything
+      - I'm done
+      - finished
+      - nothing else
+      - I'm finished for now
+      - no more questions
+      - I'm good
+      - that's all there is
 
-- intent: confused
-  examples: |
-    - what is this?
-    - ?
-    - what do you do?
-    - what questions can I ask you?
-    - what can you help me with?
-    - what is your purpose?
-    - what can you do for me?
-    - what are you?
+  - intent: confused
+    examples: |
+      - what is this?
+      - ?
+      - what do you do?
+      - what questions can I ask you?
+      - what can you help me with?
+      - what is your purpose?
+      - what can you do for me?
+      - what are you?
 
-- intent: affirm
-  examples: |
-    - yes
-    - indeed
-    - of course
-    - that sounds good
-    - correct
-    - ok that makes sense
-    - ok
-    - sure
-    - nice
+  - intent: affirm
+    examples: |
+      - yes
+      - indeed
+      - of course
+      - that sounds good
+      - correct
+      - ok that makes sense
+      - ok
+      - sure
+      - nice
 
-- intent: deny
-  examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+  - intent: deny
+    examples: |
+      - no
+      - n
+      - never
+      - I don't think so
+      - don't like that
+      - no way
+      - not really
 
-- intent: ask_recipe
-  examples: |
-    - How do I make [spaghetti carbonara](dish_name)?
-    - Could you provide a recipe for chicken [tikka masala](dish_name)?
-    - I'm interested in making [banana bread](dish_name). Do you have a good recipe?
-    - What ingredients do I need for a [caesar salad](dish_name)?
-    - Can you help me with a recipe for [pumpkin soup](dish_name)?
-    - I'd like to try making [beef wellington](dish_name). Can you guide me?
-    - How do I prepare [ratatouille](dish_name)?
-    - What's the best way to make a [tiramisu](dish_name)?
-    - Can you show me how to bake [blueberry muffins](dish_name)?
-    - I'm looking for a recipe to make [lobster bisque](dish_name).
-    - How can I make [pad thai](dish_name) at home?
-    - I need a simple recipe for [quiche Lorraine](dish_name).
-    - Can you teach me how to prepare [fish and chips](dish_name)?
-    - I'd love to know how to cook [coq au vin](dish_name).
-    - Could you give me the steps for making [gazpacho](dish_name)?
-    - I'm craving [butternut squash risotto](dish_name). Do you have a recipe?
-    - How do I make a traditional [clam chowder](dish_name)?
-    - Can you provide a recipe for [pecan pie](dish_name)?
-    - Can you give me a recipe for [lasagna](dish_name)?
-    - What is the recipe for [steak](dish_name)?
-    - Can you teach me how to make [sausage](dish_name)?
-    - How do you make [pizza](dish_name)?
-    - I want to know how to cook [grilled chicken](dish_name)
-    - Teach me how to make [beef carpaccio](dish_name)
-    - How can I prepare a classic [spaghetti bolognese](dish_name)?
-    - Please share the steps to make a [vegetarian lasagna](dish_name)
-    - I'd like a recipe for a creamy [mushroom risotto](dish_name)
-    - Show me how to cook a perfect [omelette](dish_name)
-    - Can you give me instructions for making homemade [sushi rolls](dish_name)?
-    - I want to make [chocolate chip cookies](dish_name). Can you help me with the recipe?
-    - Teach me how to prepare a [Thai green curry](dish_name)
-    - How do I bake a [red velvet cake](dish_name) from scratch?
-    - What's the process for making a [margarita pizza](dish_name)?
-    - Share the secrets to a delicious homemade [apple pie](dish_name)
+  - intent: ask_recipe
+    examples: |
+      - How do I make [spaghetti carbonara](dish_name)?
+      - Could you provide a recipe for chicken [tikka masala](dish_name)?
+      - I'm interested in making [banana bread](dish_name). Do you have a good recipe?
+      - What ingredients do I need for a [caesar salad](dish_name)?
+      - Can you help me with a recipe for [pumpkin soup](dish_name)?
+      - I'd like to try making [beef wellington](dish_name). Can you guide me?
+      - How do I prepare [ratatouille](dish_name)?
+      - What's the best way to make a [tiramisu](dish_name)?
+      - Can you show me how to bake [blueberry muffins](dish_name)?
+      - I'm looking for a recipe to make [lobster bisque](dish_name).
+      - How can I make [pad thai](dish_name) at home?
+      - I need a simple recipe for [quiche Lorraine](dish_name).
+      - Can you teach me how to prepare [fish and chips](dish_name)?
+      - I'd love to know how to cook [coq au vin](dish_name).
+      - Could you give me the steps for making [gazpacho](dish_name)?
+      - I'm craving [butternut squash risotto](dish_name). Do you have a recipe?
+      - How do I make a traditional [clam chowder](dish_name)?
+      - Can you provide a recipe for [pecan pie](dish_name)?
+      - Can you give me a recipe for [lasagna](dish_name)?
+      - What is the recipe for [steak](dish_name)?
+      - Can you teach me how to make [sausage](dish_name)?
+      - How do you make [pizza](dish_name)?
+      - I want to know how to cook [grilled chicken](dish_name)
+      - Teach me how to make [beef carpaccio](dish_name)
+      - How can I prepare a classic [spaghetti bolognese](dish_name)?
+      - Please share the steps to make a [vegetarian lasagna](dish_name)
+      - I'd like a recipe for a creamy [mushroom risotto](dish_name)
+      - Show me how to cook a perfect [omelette](dish_name)
+      - Can you give me instructions for making homemade [sushi rolls](dish_name)?
+      - I want to make [chocolate chip cookies](dish_name). Can you help me with the recipe?
+      - Teach me how to prepare a [Thai green curry](dish_name)
+      - How do I bake a [red velvet cake](dish_name) from scratch?
+      - What's the process for making a [margarita pizza](dish_name)?
+      - Share the secrets to a delicious homemade [apple pie](dish_name)
 
-- intent: ask_ingredients_list
-  examples: |
-    - Show me the ingredients list
-    - What ingredients do I need for chicken Alfredo?
-    - What are the ingredients?
-    - Can you list the ingredients for this dish?
-    - Show me the ingredient list, please.
-    - What's in the recipe?
-    - Tell me what I need for this recipe.
-    - List the components, please.
-    - What do I need to make this?
-    - What ingredients should I gather?
-    - Show me the list of items.
-    - Can you provide the ingredient list?
-    - What are the necessary ingredients?
-    - I'm curious about the ingredients.
-    - Tell me about the components.
-    - What's on the ingredient list?
-    - List the required items, please.
-    - Provide me with the ingredients.
-    - What are the ingredients for this meal?
-    - What's in the recipe, ingredient-wise?
-    - Can you describe the ingredients?
-    - What's the list of ingredients?
-    - Show me the ingredients needed.
-    - How many ingredients do I need to buy?
-    - What do I need to have on hand?
-    - Tell me the ingredients for this dish.
-    - List the required components.
-    - What are the items I need?
-    - Can you tell me what I need to gather?
-    - I want to know what ingredients are required.
+  - intent: ask_ingredients_list
+    examples: |
+      - Show me the ingredients list
+      - What ingredients do I need for chicken Alfredo?
+      - What are the ingredients?
+      - Can you list the ingredients for this dish?
+      - Show me the ingredient list, please.
+      - What's in the recipe?
+      - Tell me what I need for this recipe.
+      - List the components, please.
+      - What do I need to make this?
+      - What ingredients should I gather?
+      - Show me the list of items.
+      - Can you provide the ingredient list?
+      - What are the necessary ingredients?
+      - I'm curious about the ingredients.
+      - Tell me about the components.
+      - What's on the ingredient list?
+      - List the required items, please.
+      - Provide me with the ingredients.
+      - What are the ingredients for this meal?
+      - What's in the recipe, ingredient-wise?
+      - Can you describe the ingredients?
+      - What's the list of ingredients?
+      - Show me the ingredients needed.
+      - How many ingredients do I need to buy?
+      - What do I need to have on hand?
+      - Tell me the ingredients for this dish.
+      - List the required components.
+      - What are the items I need?
+      - Can you tell me what I need to gather?
+      - I want to know what ingredients are required.
 
-- intent: ask_ingredient_details
-  examples: |
-    - How much of [salt](ingredient_name) do I need?
-    - Tell me how much of the [vinegar](ingredient_name) I need.
-    - What's the quantity of [olive oil](ingredient_name)?
-    - Explain the use of [garlic](ingredient_name) in the recipe.
-    - Clarify the amount of [sugar](ingredient_name) required.
-    - Can you provide details about [tomatoes](ingredient_name)?
-    - How many [onions](ingredient_name) do I need?
-    - Give me more information about the [eggs](ingredient_name).
-    - Describe the role of [butter](ingredient_name) in the dish.
-    - What should I know about [flour](ingredient_name)?
-    - I need more details about [cheese](ingredient_name).
-    - How to use [basil](ingredient_name) in the recipe?
-    - Explain the use of [vinegar](ingredient_name).
+  - intent: ask_ingredients_in_step
+    examples: |
+      - What are the ingredients in this step?
+      - Show me the ingredients needed for this step.
+      - What are the items I need in this step?
+      - I want to know what ingredients are required for this step.
 
-- intent: ask_how
-  examples: |
-    - How do I preheat the oven?
-    - How do I boil water?
-    - What does it mean when it says cook until golden?
-    - What should I do when the water boils over?
-    - How do I sauté vegetables properly?
-    - What's the best way to chop onions without tearing up?
-    - Can you explain how to julienne carrots?
-    - How do I know when a cake is done baking?
-    - Explain the difference between baking soda and baking powder.
-    - What's the correct way to season a cast-iron skillet?
-    - How can I test if an egg is fresh or not?
-    - Teach me how to properly sear a steak.
-    - How do I deglaze a pan?
-    - What's the secret to a smooth gravy?
-    - I'm not sure how to knead dough. Can you guide me?
-    - How do I achieve a crispy crust on fried chicken?
-    - Explain the basics of food safety in the kitchen.
-    - What's the difference between simmering and boiling?
-    - How can I avoid overcooking pasta?
-    - What does it mean to blanch vegetables?
-    - How do I properly store leftovers?
-    - Can you recommend a substitute for a missing ingredient?
-    - What's the best way to defrost frozen food?
-    - How do I adjust a recipe for high-altitude cooking?
+  - intent: ask_ingredient_details
+    examples: |
+      - How much [salt](ingredient_name) do I need?
+      - How much of [salt](ingredient_name) do I need?
+      - How much of [salt](ingredient_name) should I put?
+      - Tell me how much of the [vinegar](ingredient_name) I need.
+      - What's the quantity of [olive oil](ingredient_name)?
+      - Explain the use of [garlic](ingredient_name) in the recipe.
+      - Clarify the amount of [sugar](ingredient_name) required.
+      - Can you provide details about [tomatoes](ingredient_name)?
+      - How many [onions](ingredient_name) do I need?
+      - How many [onions](ingredient_name) should I put?
+      - Give me more information about the [eggs](ingredient_name).
+      - Describe the role of [butter](ingredient_name) in the dish.
+      - What should I know about [flour](ingredient_name)?
+      - I need more details about [cheese](ingredient_name).
+      - How to use [basil](ingredient_name) in the recipe?
+      - Explain the use of [vinegar](ingredient_name).
 
-- intent: ask_next_step
-  examples: |
-    - What is the next step?
-    - Next
-    - Ok
-    - Continue
-    - Yes
-    - And then
-    - What's the next step in the recipe?
-    - Can you tell me what to do next?
-    - What do I do now?
-    - Proceed with the next step, please.
-    - I'm ready for the next instruction.
-    - And then?
-    - What comes after this?
-    - What's the following step?
-    - Continue with the recipe, please.
-    - Tell me the next cooking step.
-    - Ok, what's next?
-    - I'm at step X, what's next?
-    - Next, please.
-    - I've completed this step, what's the next one?
-    - What should I do after this?
-    - Move on to the next part.
-    - And then what happens?
-    - What's the subsequent action?
-    - Continue with the cooking process.
-    - I'm waiting for the next instruction.
-    - Give me the next step.
-    - I'm ready to move forward.
-    - After this, what's next?
-    - What's on the agenda now?
-    - Can you guide me to the next step?
-    - What's the next action item?
-    - What should I do in the next phase?
-    - Tell me the next move.
-    - I'm looking for the next direction.
+  # Need to entity tag
+  - intent: ask_how
+    examples: |
+      - How do I preheat the oven?
+      - How do I boil water?
+      - What does it mean when it says cook until golden?
+      - What should I do when the water boils over?
+      - How do I sauté vegetables properly?
+      - What's the best way to chop onions without tearing up?
+      - Can you explain how to julienne carrots?
+      - How do I know when a cake is done baking?
+      - Explain the difference between baking soda and baking powder.
+      - What's the correct way to season a cast-iron skillet?
+      - How can I test if an egg is fresh or not?
+      - Teach me how to properly sear a steak.
+      - How do I deglaze a pan?
+      - What's the secret to a smooth gravy?
+      - I'm not sure how to knead dough. Can you guide me?
+      - How do I achieve a crispy crust on fried chicken?
+      - Explain the basics of food safety in the kitchen.
+      - What's the difference between simmering and boiling?
+      - How can I avoid overcooking pasta?
+      - What does it mean to blanch vegetables?
+      - How do I properly store leftovers?
+      - Can you recommend a substitute for a missing ingredient?
+      - What's the best way to defrost frozen food?
+      - How do I adjust a recipe for high-altitude cooking?
 
-- intent: ask_previous_step
-  examples: |
-    - What is the previous step?
-    - Go back
-    - What was the step before this one?
-    - Can you go back to the previous instruction?
-    - How do I do the last step?
-    - Take me back one step, please.
-    - I want to review the previous action.
-    - And before this?
-    - What was the step that came before?
-    - Go back in the recipe, please.
-    - What's the preceding step?
-    - Can I backtrack to the last instruction?
-    - Show me the previous cooking step.
-    - Ok, what was the step right before this?
-    - I need to see the previous step.
-    - What should I have done before this?
-    - What came right before this?
-    - What was the last thing I did?
-    - Move back to the previous part.
-    - And what was the step just prior?
-    - What's the action that precedes this one?
-    - Take me to the previous part of the recipe.
-    - I want to revisit the step I did before this.
-    - Can you guide me to the previous step?
-    - What's the step that happened right before?
-    - What should I have done in the previous phase?
-    - Show me the last move.
-    - I'm looking for the instruction just before this.
-    - Before this, what was I supposed to do?
-    - What happened in the previous stage?
-    - Can I see the step before this one?
-    - How do I go back to the last action?
+  - intent: ask_next_step
+    examples: |
+      - What is the next step?
+      - Next
+      - Ok
+      - Continue
+      - Yes
+      - And then
+      - What's the next step in the recipe?
+      - Can you tell me what to do next?
+      - What do I do now?
+      - Proceed with the next step, please.
+      - I'm ready for the next instruction.
+      - And then?
+      - What comes after this?
+      - What's the following step?
+      - Continue with the recipe, please.
+      - Tell me the next cooking step.
+      - Ok, what's next?
+      - I'm at step X, what's next?
+      - Next, please.
+      - I've completed this step, what's the next one?
+      - What should I do after this?
+      - Move on to the next part.
+      - And then what happens?
+      - What's the subsequent action?
+      - Continue with the cooking process.
+      - I'm waiting for the next instruction.
+      - Give me the next step.
+      - I'm ready to move forward.
+      - After this, what's next?
+      - What's on the agenda now?
+      - Can you guide me to the next step?
+      - What's the next action item?
+      - What should I do in the next phase?
+      - Tell me the next move.
+      - I'm looking for the next direction.
 
-- intent: ask_repeat
-  examples: |
-    - Wait what do I do again?
-    - Can you give me the step again?
-    - Can you explain this again?
-    - Can you show me this again?
-    - Repeat the step, please.
-    - Repeat
-    - Again 
-    - Repeat please
-    - Again please
-    - I didn't catch that. Can you repeat it?
-    - Please explain it again.
-    - Can you go over that one more time?
-    - I need to hear that step again.
-    - I'm a bit confused.
-    - What was the last thing you said? Repeat it, please.
-    - I didn't quite get it. Say it again, please.
-    - Can you repeat the instruction?
-    - Could you clarify that step?
-    - Can you repeat?
-    - I'm lost. Can you go through it one more time?
-    - Im lost
-    - Can you explain it again?
-    - Can you show me that again?
-    - I'm having trouble following. Repeat the step, please.
-    - I'm struggling to remember. Explain it again.
-    - I'm a bit confused. Can you provide a recap?
+  - intent: ask_previous_step
+    examples: |
+      - What is the previous step?
+      - Go back
+      - What was the step before this one?
+      - Can you go back to the previous instruction?
+      - How do I do the last step?
+      - Take me back one step, please.
+      - I want to review the previous action.
+      - And before this?
+      - What was the step that came before?
+      - Go back in the recipe, please.
+      - What's the preceding step?
+      - Can I backtrack to the last instruction?
+      - Show me the previous cooking step.
+      - Ok, what was the step right before this?
+      - I need to see the previous step.
+      - What should I have done before this?
+      - What came right before this?
+      - What was the last thing I did?
+      - Move back to the previous part.
+      - And what was the step just prior?
+      - What's the action that precedes this one?
+      - Take me to the previous part of the recipe.
+      - I want to revisit the step I did before this.
+      - Can you guide me to the previous step?
+      - What's the step that happened right before?
+      - What should I have done in the previous phase?
+      - Show me the last move.
+      - I'm looking for the instruction just before this.
+      - Before this, what was I supposed to do?
+      - What happened in the previous stage?
+      - Can I see the step before this one?
+      - How do I go back to the last action?
 
-- intent: ask_specific_step
-  examples: |
+  - intent: ask_repeat
+    examples: |
+      - Wait what do I do again?
+      - Can you give me the step again?
+      - Can you explain this again?
+      - Can you show me this again?
+      - Repeat the step, please.
+      - Repeat
+      - Again 
+      - Repeat please
+      - Again please
+      - I didn't catch that. Can you repeat it?
+      - Please explain it again.
+      - Can you go over that one more time?
+      - I need to hear that step again.
+      - I'm a bit confused.
+      - What was the last thing you said? Repeat it, please.
+      - I didn't quite get it. Say it again, please.
+      - Can you repeat the instruction?
+      - Could you clarify that step?
+      - Can you repeat?
+      - I'm lost. Can you go through it one more time?
+      - Im lost
+      - Can you explain it again?
+      - Can you show me that again?
+      - I'm having trouble following. Repeat the step, please.
+      - I'm struggling to remember. Explain it again.
+      - I'm a bit confused. Can you provide a recap?
+
+  - intent: ask_specific_step
+    examples: |
       - What should I do in step [two](step_number:2) of the recipe?
       - Can you explain step [four](step_number:4) in the process?
       - What does step [three](step_number:3) involve in the guide?
@@ -314,4 +325,18 @@ nlu:
       - Describe step [9](step_number:9) for me.
       - I'm unsure about step [10](step_number:10). Can you help?
 
+  - intent: ask_temperature
+    examples: |
+      - what temperature?
+      - what is the temperature in this step?
+      - How hot should it be?
+      - Should I set up the oven at 425 degrees?
 
+  - intent: ask_time
+    examples: |
+      - how long?
+      - for how long?
+      - what is the time in this step?
+      - How much time should I cook?
+      - How long should I cook?
+      - Should I cook for more than 5 minutes?

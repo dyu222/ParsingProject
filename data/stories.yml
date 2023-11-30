@@ -48,3 +48,13 @@ stories:
   steps:
   - intent: ask_specific_step
   - action: action_specific_step
+
+- story: User asks for temperature
+  steps:
+  - intent: ask_temperature
+  - action: action_temperature
+
+- story: User asks for time
+  steps:
+  - intent: ask_time
+  - action: action_time

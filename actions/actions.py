@@ -198,17 +198,17 @@ class ActionProvideIngredientDetails(Action):
         # and return the ingredient's details.
         # ingredient_name = tracker.get_slot("ingredient_name")
         ingredient_name = get_entity_value(tracker)
-        if ingredient_name == None:
-            message = "Sorry I don't know how much of this ingredient you should put."
-        global current_step
-        if current_step == None:
-            dispatcher.utter_message(text="Please select a recipe first!")
-            return []
-        if ingredient_name in current_step.recipe_ingredients:
-            measurement_string = current_step.recipe_ingredients[ingredient_name]
-            # parts = measurement_string.split('of', 1)
-            # m = parts[0].strip() if len(parts) > 0 else measurement_string.strip()
-            message = "You should put " + measurement_string + " of " + ingredient_name
+        message = "Sorry I don't know how much of this ingredient you should put."
+        if ingredient_name != None:
+            global current_step
+            if current_step == None:
+                dispatcher.utter_message(text="Please select a recipe first!")
+                return []
+            if ingredient_name in current_step.recipe_ingredients:
+                measurement_string = current_step.recipe_ingredients[ingredient_name]
+                # parts = measurement_string.split('of', 1)
+                # m = parts[0].strip() if len(parts) > 0 else measurement_string.strip()
+                message = "You should put " + measurement_string + " of " + ingredient_name
 
         dispatcher.utter_message(message)
 
@@ -333,7 +333,7 @@ class ActionSpecificStep(Action):
 # what temperature? -Katrina wants to do this
 class ActionTemperature(Action):
     def name(self) -> Text:
-        return "action_repeat"
+        return "action_temperature"
 
     def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
@@ -353,7 +353,7 @@ class ActionTemperature(Action):
 # How long do I <specific technique>? -Katrina wants to do this
 class ActionTime(Action):
     def name(self) -> Text:
-        return "action_repeat"
+        return "action_time"
 
     def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
