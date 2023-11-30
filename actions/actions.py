@@ -23,6 +23,7 @@ import json
 
 dish_head = None
 current_step = None
+specific_step = dish_head
 
 ################################################################################
 # Some helpers:
@@ -72,7 +73,8 @@ class ActionSearchRecipe(Action):
         dish_name = get_entity_value(tracker)
         if not dish_name:
             dispatcher.utter_message(text=message)
-            return [SlotSet("recipe_details", None)]
+            return []
+
         processed_dish_name = '+'.join([word.capitalize()
                                        for word in dish_name.split()])
 
@@ -87,7 +89,8 @@ class ActionSearchRecipe(Action):
             # throws an ERROR WHEN NOTHING IN 'meals
             if response.json()['meals'] == None:
                 dispatcher.utter_message(text=message)
-                return [SlotSet("recipe_details", None)]
+                return []
+
             recipe = response.json()['meals'][0]
             dispatcher.utter_message(
                 "Searching for " + dish_name + " recipe\n")
@@ -130,6 +133,9 @@ class ActionSearchRecipe(Action):
         dispatcher.utter_message(text=message)
         global current_step
         current_step = dish_head.next
+
+        global specific_step
+        specific_step = dish_head
 
         # This is how you track history
         return []
@@ -322,10 +328,42 @@ class ActionSpecificStep(Action):
     ) -> List[Dict[Text, Any]]:
         # Implement logic to get a specific step
         # and return the specific step details
+        global specific_step
         step_number = get_entity_value(tracker)
 
+        # dispatcher.utter_message(
+        #     text=f"i am in action specific step{step_number}")
+
+        if not step_number:
+            dispatcher.utter_message(
+                text="Which step of the recipe are you asking for?")
+            return []
+
+        if specific_step == None:
+            dispatcher.utter_message(text="Please select a recipe first!")
+            return []
+        try:
+            step_number = int(step_number)
+            current_step = specific_step
+
+            for i in range(2, step_number + 2):
+                current_step = current_step.next
+
+                if current_step.text:
+                    pass
+                else:
+                    dispatcher.utter_message(
+                        text=f"The recipe only has {i} steps.")
+                    return []
+        except:
+            dispatcher.utter_message(
+                text=f"The recipe does not have that many steps.")
+            return []
+
+        text = f"Step {step_number} is: " + current_step.text
+
         dispatcher.utter_message(
-            text=f"i am in action specific step{step_number}")
+            text=text)
 
         return []
 

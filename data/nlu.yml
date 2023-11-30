@@ -310,7 +310,13 @@ nlu:
       - I'm stuck on step [six](step_number:6). What is it?
       - Please explain step [2](step_number:2) again.
       - I don't understand what to do in step [3](step_number:3).
+      - What is the [first](step_number:1) step?
       - What is the [5th](step_number:5) step?
+      - What is the [7th](step_number:7) step?
+      - What is the [8th](step_number:8) step?
+      - What is the [9th](step_number:9) step?
+      - What is the [10th](step_number:10) step?
+      - What is the [11th](step_number:11) step?
       - What is step [7](step_number:7)?
       - How do I complete step [eight](step_number:8)?
       - Can you repeat what's in step [ten](step_number:10)?
@@ -324,6 +330,11 @@ nlu:
       - What's involved in step [eight](step_number:8) of the process?
       - Describe step [9](step_number:9) for me.
       - I'm unsure about step [10](step_number:10). Can you help?
+      - What is the [first](step_number:1) step?
+      - what is the [second](step_number:2) step?
+      - What is the [third](step_number:3) step?
+      - What is the [fifth](step_number:5) step?
+      - What is the [fourth](step_number:4) step?
 
   - intent: ask_temperature
     examples: |
