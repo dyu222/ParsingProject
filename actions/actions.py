@@ -120,6 +120,9 @@ class ActionSearchRecipe(Action):
 
             # print(instruction)
             instruction = remove_leading_space(instruction)
+            instruction = instruction.lstrip('\t')
+            if len(instruction) < 2:
+                continue
             instructions_text += ("\t" + instruction + "\n")
             curr_step = Step(instruction, recipe_ingredients, prev_step)
             prev_step.next = curr_step
