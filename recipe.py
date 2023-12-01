@@ -98,6 +98,12 @@ ingredients_lex = {"salt", "pepper", "olive oil", "vegetable oil", "butter", "eg
                    "jicama", "chayote", "wasabi peas", "goji berries", "goldenberries", "black garlic", "kombu", "nori", 
                    "parmigiano-reggiano", "water", "red chile flakes", "seasoning", "sauce"}
 
+meat_lex = {'beef', 'pork', 'chicken', 'lamb', 'turkey', 'fish', 'shrimp', 'bacon', 'sausage', 'ham', 'steak', 'veal', 'venison', 'mutton', 'rabbit', 'duck', 'goose',
+    'anchovy', 'calamari', 'clams', 'crab', 'lobster', 'mussels', 'octopus', 'oysters', 'scallops', 'squid', 'tilapia', 'catfish', 'trout', 'salmon', 'tuna',
+    'sardines', 'haddock', 'cod', 'swordfish', 'perch', 'crayfish', 'snapper', 'bass', 'carp', 'marlin', 'halibut', 'pike', 'snail', 'frog', 'turtle', 'escargot',
+    'buffalo', 'bison', 'elk', 'horse', 'boar', 'quail', 'pigeon', 'pheasant', 'emu', 'kangaroo', 'alligator', 'turtle', 'squab', 'veal', 'mahi-mahi'}
+
+
 
 
 def extract_time_information(input_string):
@@ -184,8 +190,11 @@ class Step:
     #         'next': None if self.next is None else self.next.to_dict()
     #     }
 
-
-
+    def is_vegetarian(self):
+        for ingredient in recipe_ingredients:
+            if ingredient in meat_lex:
+                return False
+        return True
 
 
     def parse(self, text, ingredients):
@@ -271,7 +280,6 @@ def remove_leading_space(input_str):
         return input_str.lstrip()
     else:
         return input_str
-
 
 
 # head = Step()

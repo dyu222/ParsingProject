@@ -439,3 +439,25 @@ class ActionTime(Action):
 
         dispatcher.utter_message(text=message)
         return []
+
+class ActionVegetarian(Action):
+    def name(self) -> Text:
+        return "action_vegetarian"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        global dish_head
+        message = "Please select a recipe first!"
+        if dish_head != None:
+            vegetarian = dish_head.next.is_vegetarian()
+            if vegetarian == True:
+                message = "Recipe is already vegetarian. Enjoy!"
+            else:
+                pass
+                # iterate through each step and change the ingredients??
+                
+                message = "Recipe is now vegetarian. Enjoy!"
+
+        dispatcher.utter_message(text=message)
+        return []
