@@ -71,6 +71,7 @@ class ActionSearchRecipe(Action):
         # This is how you access extracted entities
         # dish_name = tracker.get_slot("dish_name")
         dish_name = get_entity_value(tracker)
+        print("dish name: ", dish_name)
         if not dish_name:
             dispatcher.utter_message(text=message)
             return []
@@ -234,12 +235,41 @@ class ActionProvideExplanation(Action):
     ) -> List[Dict[Text, Any]]:
         # Implement logic to give external instructions on a question
         # and return the explanation or link or instructions
-
+        global current_step
         # logic:
         # take the latest message and check to see if it contains this or that, and if the string is short enough (less than 5 words or smth)
+        message = "sorry, I do not know what you are asking about, please ask again"
+        search_url = ""
+        try:
+            text = tracker.latest_message['text']
+            print("provide explanation text: ", text)
+            question = ""
+            print("current step text: ", current_step.text)
+            print("current step text: ", current_step.methods)
+            if len(text) <= 20: # short text
+                if "this" in text or "that" in text: # assume its: how do i do this??? maybe make this better later?
+                    question = "how to " + current_step.text
+                else:
+                    question = text
+            else: # just return question url
+                question = text
+            print("question: ", question)
+            question = question.split(' ')
+            print("question: ", question)
+            if "how" in question:
+                search_url = "https://www.youtube.com/results?search_query=" + "+".join(question)
+            else:
+                search_url = "https://www.google.com/search?q=" + "+".join(question)
+            print("search url: ", search_url)
+        except:
+            pass
+        
+        if search_url:
+            message = "Here is a link to a search for your question that may give you more information: " + search_url
+        dispatcher.utter_message(message)
         # if this matches, then take the current step recipe details and return the google query url for it
         # if this doesnt match, then take the detailed question and return the query for the specific question
-        dispatcher.utter_message("User is asking for help")
+        # dispatcher.utter_message("User is asking for help")
 
         return []
 
