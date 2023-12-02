@@ -1,5 +1,6 @@
 import requests
 import re
+import random
 # import spacy
 
 # Specify the URL of the API you want to call
@@ -103,6 +104,14 @@ meat_lex = {'beef', 'pork', 'chicken', 'lamb', 'turkey', 'fish', 'shrimp', 'baco
     'sardines', 'haddock', 'cod', 'swordfish', 'perch', 'crayfish', 'snapper', 'bass', 'carp', 'marlin', 'halibut', 'pike', 'snail', 'frog', 'turtle', 'escargot',
     'buffalo', 'bison', 'elk', 'horse', 'boar', 'quail', 'pigeon', 'pheasant', 'emu', 'kangaroo', 'alligator', 'turtle', 'squab', 'veal', 'mahi-mahi'}
 
+vegetarian_alternatives = [
+    'Plant-based mock meat', 'Lentils', 'Portobello mushrooms',
+    'Plant-based impossible meat', 'Jackfruit', 'Tempeh bacon', 'Tofu', 'Seitan', 'Chickpeas', 
+    'Lentils', 'Eggplant', 'Quinoa', 'Tofu', 'Tempeh', 'Eggplant', 'Zucchini', 'King oyster mushrooms',
+    'Smoked tofu', 'Eggplant strips', 'Mushroom and lentil mixtures', 'Chickpea or black bean sausages',
+    'Smoked tofu', 'Tempeh', 'Portobello mushrooms', 'Eggplant or cauliflower steaks',
+    'Artichoke hearts', 'Textured vegetable protein (TVP)', 'Soy curls', 'Black bean burgers', 'Sweet potato falafel']
+
 
 
 
@@ -191,10 +200,30 @@ class Step:
     #     }
 
     def is_vegetarian(self):
-        for ingredient in recipe_ingredients:
+        for ingredient in self.recipe_ingredients:
             if ingredient in meat_lex:
                 return False
         return True
+    
+    def make_vegetarian(self):
+        for ingredient in self.ingredients:
+            if ingredient in meat_lex:
+                # remove meat from ingredients
+                measure = None
+                self.ingredients.remove(ingredient)
+                if ingredient in self.recipe_ingredients:
+                    measure = self.recipe_ingredients[ingredient]
+                    del self.recipe_ingredients[ingredient]
+                # replace with vegetarian alternative
+                substitute = random.choice(vegetarian_alternatives)
+                self.ingredients.append(substitute)
+                if substitute not in self.recipe_ingredients:
+                    if measure:
+                        self.recipe_ingredients[substitute] = measure
+                    else:
+                        self.recipe_ingredients[substitute] = 'to taste'
+
+            
 
 
     def parse(self, text, ingredients):

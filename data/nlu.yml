@@ -353,3 +353,11 @@ nlu:
       - How much time should I cook?
       - How long should I cook?
       - Should I cook for more than 5 minutes?
+
+  - intent: ask_vegetarian
+    examples: |
+      - can you make this vegetarian?
+      - I don't eat meat
+      - I can't eat beef
+      - I don't have meat
+      - can you change the recipe to be vegetarian?

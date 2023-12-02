@@ -58,3 +58,8 @@ stories:
   steps:
   - intent: ask_time
   - action: action_time
+
+- story: User asks for recipe to be vegetarian
+  steps:
+  - intent: ask_vegetarian
+  - action: action_vegetarian

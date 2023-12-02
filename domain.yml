@@ -18,6 +18,7 @@ intents:
   - ask_temperature
   - ask_time
   - ask_specific_step
+  - ask_vegetarian
 
 
 entities:
@@ -37,6 +38,7 @@ actions:
   - action_temperature
   - action_time
   - action_specific_step
+  - action_vegetarian
 
 responses:
   utter_greet:
