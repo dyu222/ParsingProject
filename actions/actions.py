@@ -314,6 +314,9 @@ class ActionProvideNextStep(Action):
         if current_step == None:
             dispatcher.utter_message(text="Please select a recipe first!")
             return []
+        if current_step.next == None:
+            dispatcher.utter_message(text="This is already the final step!")
+            return []
         current_step = current_step.next  # we are actually moving to the next step!
         if current_step.text:
             step_text = "The next step is: " + current_step.text
@@ -492,8 +495,11 @@ class ActionVegetarian(Action):
                         for i in range(len(ingredient_split)):
                             word = ingredient_split[i]
                             if word in meat_lex:
-                                substitute = random.choice(vegetarian_alternatives)
-                                subst_dict[word] = substitute
+                                if word in subst_dict:
+                                    substitute = subst_dict[word]
+                                else:
+                                    substitute = random.choice(vegetarian_alternatives)
+                                    subst_dict[word] = substitute
                                 ingredient_split[i] = substitute
                                 
                         recombined = ' '.join(ingredient_split)
@@ -505,6 +511,12 @@ class ActionVegetarian(Action):
                     while temp_curr != None:
                         # remove all ingredients that are not vegetarian, and replace with vegetarian substitutes
                         # temp_curr.make_vegetarian()
+                        print("before temp_curr.text: ", temp_curr.text)
+                        #update the text
+                        for word in subst_dict:
+                            if word in temp_curr.text:
+                                temp_curr.text = temp_curr.text.replace(word, subst_dict[word])
+                        print("after temp_curr.text: ", temp_curr.text)
                         temp_curr.recipe_ingredients = new_ingredients
                         # go in and change this steps ingredients
                         for i in range(len(temp_curr.ingredients)): #each val in list
