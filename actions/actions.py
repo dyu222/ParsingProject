@@ -146,7 +146,12 @@ class ActionSearchRecipe(Action):
                 continue
             instructions_text += ("\t" + instruction + "\n")
             curr_step = Step(instruction, recipe_ingredients, prev_step)
+            print("text: ", curr_step.text)
             print("ingredients: ", curr_step.ingredients)
+            print("time: ", curr_step.time)
+            print("tools: ", curr_step.tools)
+            print("utensils: ", curr_step.utensils)
+
             prev_step.next = curr_step
             prev_step = curr_step
 
@@ -208,10 +213,14 @@ class ActionProvideIngredientInStep(Action):
         if dish_head != None:
             message = "There are no ingredients in this step."
             global current_step
+            print(current_step.text)
             ingredients = list(current_step.ingredients)
+            
             if not ingredients:
                 message = "Sorry, I don't know what ingredients you need"
             else:
+                # print(ingredients)
+                ingredients = ', '.join(ingredients)
                 message = "Here are the ingredients in this step:\n" + ingredients
         dispatcher.utter_message(message)
         return []
@@ -244,7 +253,46 @@ class ActionProvideIngredientDetails(Action):
         dispatcher.utter_message(message)
 
         return []
+    
+class ActionProvideTools(Action):
+    def name(self) -> Text:
+        return "action_provide_tools"
 
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        message = "Please select a recipe first!"
+        if current_step != None:
+            tools = current_step.tools
+            if tools == None:
+                message = "Sorry I don't know the tools of this step."
+            else:
+                # print(ingredients)
+                tools = ', '.join(tools)
+                message = "The tools should be " + tools + ". "
+
+        dispatcher.utter_message(text=message)
+        return []
+    
+class ActionProvideUtensils(Action):
+    def name(self) -> Text:
+        return "action_provide_utensils"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        message = "Please select a recipe first!"
+        if current_step != None:
+            utensils = current_step.utensils
+            if utensils == None:
+                message = "Sorry I don't know the utensils of this step."
+            else:
+                # print(ingredients)
+                utensils = ', '.join(utensils)
+                message = "The utensils should be " + utensils + ". "
+
+        dispatcher.utter_message(text=message)
+        return []
 
 # Derek will take this one
 class ActionProvideExplanation(Action):

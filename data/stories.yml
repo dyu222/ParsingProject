@@ -29,6 +29,16 @@ stories:
   - intent: ask_ingredient_details
   - action: action_provide_ingredient_details
 
+- story: User asks for tools
+  steps:
+  - intent: ask_tools
+  - action: action_provide_tools
+
+- story: User asks for utensils
+  steps:
+  - intent: ask_utensils
+  - action: action_provide_utensils
+
 - story: User asks for help
   steps:
   - intent: ask_how

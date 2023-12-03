@@ -187,6 +187,20 @@ nlu:
       - How to use [basil](ingredient_name) in the recipe?
       - Explain the use of [vinegar](ingredient_name).
 
+  - intent: ask_tools
+    examples: |
+      - What tools should I use for this step?
+      - What are the tools?
+      - What tools to use?
+      - Tools?
+
+  - intent: ask_utensils
+    examples: |
+      - What utensils should I use for this step?
+      - What are the utensils?
+      - What utensils to use?
+      - Utensils?
+
   # Need to entity tag
   - intent: ask_how
     examples: |

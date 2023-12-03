@@ -11,6 +11,8 @@ intents:
   - ask_ingredients_list
   - ask_ingredients_in_step
   - ask_ingredient_details
+  - ask_tools
+  - ask_utensils
   - ask_how
   - ask_next_step
   - ask_previous_step
@@ -33,6 +35,8 @@ actions:
   - action_provide_ingredients_list
   - action_provide_ingredients_in_step
   - action_provide_ingredient_details
+  - action_provide_tools
+  - action_provide_utensils
   - action_provide_explanation
   - action_provide_next_step
   - action_provide_previous_step
