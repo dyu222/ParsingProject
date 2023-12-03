@@ -555,10 +555,14 @@ class ActionScaleRecipe(Action):
             return []
 
         scale = get_entity_value(tracker)
+        try:
+            scale = float(scale)
+        except:
+            scale = None
 
         if not scale:
             dispatcher.utter_message(
-                text="Please ask again and include the number of people you want to make the recipe for!")
+                text="Please ask again and include the number of people (as a number: 2,5,10...) you want to make the recipe for!")
             return []
 
         # Change the recipe globally: new quantity = old quantity / serving size * scale
@@ -567,6 +571,28 @@ class ActionScaleRecipe(Action):
         # Change the ingredients for each step
         # step.ingredients are the ingredients in each step
         # step.recipe_ingredients are the ingredients for the entire recipe
+        # got this pattern from chat gpt hopefully it works :)
+        pattern = r'\d+\.?\d*|\d*\.?\d+|\d+/\d+' # matches numbers, decimals, and fractions
+        for ingredient in dish_head.next.recipe_ingredients:
+            # print values
+            # print("ingredient: ", ingredient)
+            original = dish_head.next.recipe_ingredients[ingredient]
+            print("original: ", original)
+            measure = re.findall(pattern, original)
+            # print("measure: ", measure)
+            if not measure:
+                continue
+            else:
+                measure = measure[0]
+                if '/' in measure:
+                    measure = measure.split('/')
+                    measure = float(measure[0])/float(measure[1])
+                else:
+                    measure = float(measure)
+            new_value = measure * scale
+            updated_measure = re.sub(pattern, str(new_value), original, count=1)
+            print("updated_measure: ", updated_measure)
+            dish_head.next.recipe_ingredients[ingredient] = updated_measure
 
         # for name, amount in dish_head.next.recipe_ingredients.items():
         #     new_amount = "1 cup"
