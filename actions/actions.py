@@ -317,12 +317,16 @@ class ActionProvideExplanation(Action):
         search_url = ""
         try:
             text = tracker.latest_message['text']
+            # text = text.lstrip("\n")
             print("provide explanation text: ", text)
             question = ""
             print("current step text: ", current_step.text)
             print("current step text: ", current_step.methods)
             if len(text) <= 20:  # short text
                 if "this" in text or "that" in text:  # assume its: how do i do this??? maybe make this better later?
+                    question = current_step.text
+                    question.lstrip("\n")
+                    question = question.replace(",","")
                     question = "how to " + current_step.text
                 else:
                     question = text
