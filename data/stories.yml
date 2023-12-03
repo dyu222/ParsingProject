@@ -19,6 +19,11 @@ stories:
   - intent: ask_ingredients_list
   - action: action_provide_ingredients_list
 
+- story: User asks about ingredients in a step
+  steps:
+  - intent: ask_ingredients_in_step
+  - action: action_provide_ingredients_in_step
+
 - story: User asks about an ingredient
   steps:
   - intent: ask_ingredient_details
@@ -63,3 +68,8 @@ stories:
   steps:
   - intent: ask_vegetarian
   - action: action_vegetarian
+
+- story: User asks to scale the recipe
+  steps:
+  - intent: ask_scale_recipe
+  - action: action_scale_recipe

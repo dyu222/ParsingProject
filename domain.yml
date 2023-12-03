@@ -19,13 +19,14 @@ intents:
   - ask_time
   - ask_specific_step
   - ask_vegetarian
-  - ask_more_food
+  - ask_scale_recipe
 
 
 entities:
   - dish_name
   - ingredient_name
   - step_number
+  - quantity
 
 actions:
   - action_search_recipe
@@ -40,7 +41,7 @@ actions:
   - action_time
   - action_specific_step
   - action_vegetarian
-  - action_more_food
+  - action_scale_recipe
 
 responses:
   utter_greet:

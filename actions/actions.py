@@ -51,6 +51,7 @@ def get_intent(tracker):
     else:
         return None
 
+
 ################################################################################
 
 
@@ -246,24 +247,26 @@ class ActionProvideExplanation(Action):
             question = ""
             print("current step text: ", current_step.text)
             print("current step text: ", current_step.methods)
-            if len(text) <= 20: # short text
-                if "this" in text or "that" in text: # assume its: how do i do this??? maybe make this better later?
+            if len(text) <= 20:  # short text
+                if "this" in text or "that" in text:  # assume its: how do i do this??? maybe make this better later?
                     question = "how to " + current_step.text
                 else:
                     question = text
-            else: # just return question url
+            else:  # just return question url
                 question = text
             print("question: ", question)
             question = question.split(' ')
             print("question: ", question)
             if "how" in question:
-                search_url = "https://www.youtube.com/results?search_query=" + "+".join(question)
+                search_url = "https://www.youtube.com/results?search_query=" + \
+                    "+".join(question)
             else:
-                search_url = "https://www.google.com/search?q=" + "+".join(question)
+                search_url = "https://www.google.com/search?q=" + \
+                    "+".join(question)
             print("search url: ", search_url)
         except:
             pass
-        
+
         if search_url:
             message = "Here is a link to a search for your question that may give you more information: " + search_url
         dispatcher.utter_message(message)
@@ -440,6 +443,7 @@ class ActionTime(Action):
         dispatcher.utter_message(text=message)
         return []
 
+
 class ActionVegetarian(Action):
     def name(self) -> Text:
         return "action_vegetarian"
@@ -466,4 +470,46 @@ class ActionVegetarian(Action):
                     message = "Sorry, I can't make this recipe vegetarian."
 
         dispatcher.utter_message(text=message)
+        return []
+
+
+class ActionScaleRecipe(Action):
+    def name(self) -> Text:
+        return "action_scale_recipe"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+
+        global dish_head
+
+        if not dish_head:
+            dispatcher.utter_message(text="Please select a recipe first!")
+            return []
+
+        scale = get_entity_value(tracker)
+
+        if not scale:
+            dispatcher.utter_message(
+                text="Please ask again and include the number of people you want to make the recipe for!")
+            return []
+
+        # Change the recipe globally: new quantity = old quantity / serving size * scale
+        ingredients_text = ""
+
+        # Change the ingredients for each step
+        # step.ingredients are the ingredients in each step
+        # step.recipe_ingredients are the ingredients for the entire recipe
+
+        # for name, amount in dish_head.next.recipe_ingredients.items():
+        #     new_amount = "1 cup"
+        #     # Example amount = '1.5kg', '2 tbs'
+        #     dish_head.next.recipe_ingredients[name] = new_amount
+        #     # Add new values to ingredients_text
+        
+        # Note that both have to be changed
+
+        dispatcher.utter_message(
+            text=f"Here are the updated ingredients for {scale} people:\n\n{ingredients_text}\n")
+
         return []

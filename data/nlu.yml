@@ -151,6 +151,22 @@ nlu:
       - Show me the ingredients needed for this step.
       - What are the items I need in this step?
       - I want to know what ingredients are required for this step.
+      - Can you list the ingredients for this part of the recipe?
+      - Which ingredients do I use now?
+      - What do I need for the current step?
+      - List the items needed in this phase of the recipe.
+      - What ingredients are used in this segment?
+      - Tell me the ingredients for this particular step.
+      - What should I gather for this step of the cooking process?
+      - Ingredients for this step?
+      - Could you provide the ingredients for the current cooking step?
+      - What ingredients are involved in this step of the recipe?
+      - Can you specify the ingredients for this stage of the recipe?
+      - What's needed for this part of the cooking?
+      - Detail the ingredients required at this point.
+      - What are the necessary ingredients for this step of the dish?
+      - What goes into this step of the recipe?
+      - Could you list what I need for this step of the preparation?
 
   - intent: ask_ingredient_details
     examples: |
@@ -362,9 +378,41 @@ nlu:
       - I don't have meat?
       - What if I am vegetarian?
       - can you change the recipe to be vegetarian?
+      - Is there a vegetarian option for this recipe?
+      - Can I substitute the chicken for something plant-based?
+      - How to make this dish without any animal products?
+      - I prefer vegetarian meals, any suggestions?
+      - Can you replace meat with a vegetarian alternative?
+      - What plant-based protein can I use instead of meat?
+      - I'm a vegan, can I still make this dish?
+      - Are there meat-free alternatives for this recipe?
+      - How can I modify this to be vegetarian-friendly?
+      - What are some vegetarian substitutes for meat in this recipe?
+      - Can this dish be made without using fish?
+      - How do I turn this recipe into a vegetarian meal?
+      - Can you suggest a vegetable to use instead of meat?
+      - Is it possible to omit meat from this recipe?
+      - I follow a plant-based diet, how can I adapt this recipe?
+      - What vegetarian ingredients would work well in this dish?
+      - Can you provide a meatless version of this recipe?
+      - How to avoid using animal products in this recipe?
+      - What's a good vegetarian alternative for this meat-based dish?
 
-  - intent: ask_more_food
+  - intent: ask_scale_recipe
     examples: |
       - Can you make it for more people?
-      - I need to cook for 10 people
-      - I need to cook for 5 people
+      - I need to cook for [10](quantity) people
+      - I need to cook for [5](quantity) people
+      - Can this recipe be scaled to serve [8](quantity)?
+      - How do I adjust this recipe for [12](quantity) guests?
+      - What if I want to halve the recipe for [2](quantity)?
+      - I'm hosting a party, how can I scale this up for [20](quantity)?
+      - How to reduce this recipe for just [3](quantity) servings?
+      - I want to prepare this for [two](quantity), what should I do?
+      - Adjusting recipe quantities for a [big](quantity) family?
+      - How to multiply this recipe for [15](quantity) people?
+      - Can I scale this recipe down for [1](quantity) person?
+      - Preparing a meal for [6](quantity), how do I adjust the quantities?
+      - How can I make this recipe suitable for [4](quantity) servings?
+      - What's the recipe adjustment for [7](quantity) people?
+      - I have to cook for a large group, can you help?
