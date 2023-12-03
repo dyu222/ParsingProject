@@ -261,11 +261,14 @@ class ActionProvideTools(Action):
     def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
+        print("tools gets called")
         message = "Please select a recipe first!"
         if current_step != None:
             tools = current_step.tools
             if tools == None:
                 message = "Sorry I don't know the tools of this step."
+            elif len(tools) == 0:
+                message = "There are no tools needed for this step."
             else:
                 # print(ingredients)
                 tools = ', '.join(tools)
@@ -281,11 +284,14 @@ class ActionProvideUtensils(Action):
     def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
+        print("utensils gets called")
         message = "Please select a recipe first!"
         if current_step != None:
             utensils = current_step.utensils
             if utensils == None:
                 message = "Sorry I don't know the utensils of this step."
+            elif len(utensils) == 0:
+                message = "There are no utensils needed for this step."
             else:
                 # print(ingredients)
                 utensils = ', '.join(utensils)

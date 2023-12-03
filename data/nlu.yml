@@ -198,6 +198,7 @@ nlu:
     examples: |
       - What utensils should I use for this step?
       - What are the utensils?
+      - What are the cooking utensils to use?
       - What utensils to use?
       - Utensils?
 
