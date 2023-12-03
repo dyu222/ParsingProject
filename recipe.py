@@ -207,7 +207,7 @@ class Step:
     
     def make_vegetarian(self):
         for ingredient in self.ingredients:
-            if ingredient in meat_lex:
+            if ingredient in meat_lex: #TODO: NEED TO UPDATE THIS BC something like "Beef fillet" isn't picked up
                 # remove meat from ingredients
                 measure = None
                 self.ingredients.remove(ingredient)

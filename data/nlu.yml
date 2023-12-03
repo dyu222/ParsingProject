@@ -357,7 +357,14 @@ nlu:
   - intent: ask_vegetarian
     examples: |
       - can you make this vegetarian?
-      - I don't eat meat
-      - I can't eat beef
-      - I don't have meat
+      - I don't eat meat?
+      - I can't eat beef?
+      - I don't have meat?
+      - What if I am vegetarian?
       - can you change the recipe to be vegetarian?
+
+  - intent: ask_more_food
+    examples: |
+      - Can you make it for more people?
+      - I need to cook for 10 people
+      - I need to cook for 5 people

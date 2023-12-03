@@ -454,13 +454,12 @@ class ActionVegetarian(Action):
             if vegetarian == True:
                 message = "Recipe is already vegetarian. Enjoy!"
             else:
-                pass
                 try:
                     # iterate through each step and change the ingredients??
                     temp_curr = dish_head.next
                     while temp_curr != None:
                         # remove all ingredients that are not vegetarian, and replace with vegetarian substitutes
-                        
+                        temp_curr.make_vegetarian()
                         temp_curr = temp_curr.next
                     message = "Recipe is now vegetarian. Enjoy!"
                 except:
