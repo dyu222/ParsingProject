@@ -200,31 +200,44 @@ class Step:
     #     }
 
     def is_vegetarian(self):
-        for ingredient in self.recipe_ingredients:
-            if ingredient in meat_lex:
-                return False
+        for ingredients in self.recipe_ingredients:
+            ingredient_list = ingredients.split(' ')
+            for ingredient in ingredient_list:
+                if ingredient in meat_lex:
+                    return False
         return True
     
+    '''
     def make_vegetarian(self):
-        for ingredient in self.ingredients:
-            if ingredient in meat_lex: #TODO: NEED TO UPDATE THIS BC something like "Beef fillet" isn't picked up
-                # remove meat from ingredients
-                measure = None
-                self.ingredients.remove(ingredient)
-                if ingredient in self.recipe_ingredients:
-                    measure = self.recipe_ingredients[ingredient]
-                    del self.recipe_ingredients[ingredient]
-                # replace with vegetarian alternative
-                substitute = random.choice(vegetarian_alternatives)
-                self.ingredients.append(substitute)
-                if substitute not in self.recipe_ingredients:
-                    if measure:
-                        self.recipe_ingredients[substitute] = measure
-                    else:
-                        self.recipe_ingredients[substitute] = 'to taste'
-
+        recipe_ingredient_removal_list = [] # list of strings to remove from recipe_ingredients after loop (might cause issues to do it midway)
+        ingredient_removal_list = []
+        for ingredients in self.ingredients:
+            ingredient_list = ingredient.split(' ')
+            for i in range(len(ingredient_list)):
+                ingredient = ingredient_list[i]
+                print(ingredient)
+                if ingredient in meat_lex: # if meat found replace meat in ingredients and recipe_ingredients
+                    # remove meat from ingredients
+                    measure = None
+                    # self.ingredients.remove(ingredients)
+                    ingredient_removal_list.append(ingredients)
+                    if ingredients in self.recipe_ingredients:
+                        measure = self.recipe_ingredients[ingredients]
+                        # del self.recipe_ingredients[ingredients]
+                        recipe_ingredient_removal_list.append(ingredients)
+                    # replace with vegetarian alternative
+                    substitute = random.choice(vegetarian_alternatives)
+                    # update the list
+                    ingredient_list[i] = substitute
+                    new_ingredient = " ".join(ingredient_list)
+                    self.ingredients.append(new_ingredient)
+                    if new_ingredient not in self.recipe_ingredients:
+                        if measure:
+                            self.recipe_ingredients[new_ingredient] = measure
+                        else:
+                            self.recipe_ingredients[new_ingredient] = 'to taste'
+    '''
             
-
 
     def parse(self, text, ingredients):
         #TODO: inplement this function, find following information

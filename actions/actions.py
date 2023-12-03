@@ -14,6 +14,8 @@ from recipe import Step, remove_leading_space
 import re
 import requests
 import json
+import random
+import traceback # for debugging
 
 # Linked List Node Class
 # If the class is too long, extract to a different python file
@@ -50,6 +52,23 @@ def get_intent(tracker):
             return tracker.latest_message["intent"]["name"]
     else:
         return None
+
+############################################################################
+# some more lexes that i think works better here than in recipe.py
+meat_lex = {'beef', 'pork', 'chicken', 'lamb', 'turkey', 'fish', 'shrimp', 'bacon', 'sausage', 'ham', 'steak', 'veal', 'venison', 'mutton', 'rabbit', 'duck', 'goose',
+    'anchovy', 'calamari', 'clams', 'crab', 'lobster', 'mussels', 'octopus', 'oysters', 'scallops', 'squid', 'tilapia', 'catfish', 'trout', 'salmon', 'tuna',
+    'sardines', 'haddock', 'cod', 'swordfish', 'perch', 'crayfish', 'snapper', 'bass', 'carp', 'marlin', 'halibut', 'pike', 'snail', 'frog', 'turtle', 'escargot',
+    'buffalo', 'bison', 'elk', 'horse', 'boar', 'quail', 'pigeon', 'pheasant', 'emu', 'kangaroo', 'alligator', 'turtle', 'squab', 'veal', 'mahi-mahi'}
+
+vegetarian_alternatives = [
+    'plant-based mock meat', 'lentils', 'portobello mushrooms',
+    'plant-based impossible meat', 'jackfruit', 'tempeh bacon', 'tofu', 'seitan', 'chickpeas', 
+    'lentils', 'eggplant', 'quinoa', 'tofu', 'eggplant', 'zucchini', 'king oyster mushrooms',
+    'smoked tofu', 'eggplant strips', 'mushroom and lentil mixtures', 'chickpea or black bean sausages',
+    'tempeh', 'portobello mushrooms', 'eggplant or cauliflower steaks',
+    'artichoke hearts', 'textured vegetable protein (TVP)', 'soy curls', 'black bean burgers', 'sweet potato'
+]
+
 
 
 ################################################################################
@@ -117,7 +136,7 @@ class ActionSearchRecipe(Action):
         dish_head = Step()
         prev_step = dish_head
         instructions_text = ""
-
+        print("recipe_ingredients: ", recipe_ingredients)
         for instruction in instructions:
 
             # print(instruction)
@@ -127,6 +146,7 @@ class ActionSearchRecipe(Action):
                 continue
             instructions_text += ("\t" + instruction + "\n")
             curr_step = Step(instruction, recipe_ingredients, prev_step)
+            print("ingredients: ", curr_step.ingredients)
             prev_step.next = curr_step
             prev_step = curr_step
 
@@ -452,7 +472,10 @@ class ActionVegetarian(Action):
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
     ) -> List[Dict[Text, Any]]:
         global dish_head
-        message = "Please select a recipe first!"
+        if not dish_head:
+            dispatcher.utter_message(text="Please select a recipe first!")
+            return []
+        
         if dish_head != None:
             vegetarian = dish_head.next.is_vegetarian()
             if vegetarian == True:
@@ -460,13 +483,45 @@ class ActionVegetarian(Action):
             else:
                 try:
                     # iterate through each step and change the ingredients??
+                    # first update the recipe ingredients for whole thing and track what replaces what
+                    subst_dict = {}
+                    new_ingredients = {}
+                    for ingredient in dish_head.next.recipe_ingredients:
+                        measure = dish_head.next.recipe_ingredients[ingredient]
+                        ingredient_split = ingredient.split(' ')
+                        for i in range(len(ingredient_split)):
+                            word = ingredient_split[i]
+                            if word in meat_lex:
+                                substitute = random.choice(vegetarian_alternatives)
+                                subst_dict[word] = substitute
+                                ingredient_split[i] = substitute
+                                
+                        recombined = ' '.join(ingredient_split)
+                        new_ingredients[recombined] = measure
+                    
+                    dish_head.next.recipe_ingredients = new_ingredients
+                        
                     temp_curr = dish_head.next
                     while temp_curr != None:
                         # remove all ingredients that are not vegetarian, and replace with vegetarian substitutes
-                        temp_curr.make_vegetarian()
+                        # temp_curr.make_vegetarian()
+                        temp_curr.recipe_ingredients = new_ingredients
+                        # go in and change this steps ingredients
+                        for i in range(len(temp_curr.ingredients)): #each val in list
+                            ingred = temp_curr.ingredients[i]
+                            i_split = ingred.split(' ')
+                            for j in range(len(i_split)): # each word in value (beef fillet)
+                                word = i_split[j]
+                                if word in subst_dict:
+                                    i_split[j] = subst_dict[word]
+                            recombined = ' '.join(i_split)
+                            temp_curr.ingredients[i] = recombined
+
                         temp_curr = temp_curr.next
                     message = "Recipe is now vegetarian. Enjoy!"
-                except:
+                except Exception as e:
+                    print(e)
+                    traceback.print_exc()
                     message = "Sorry, I can't make this recipe vegetarian."
 
         dispatcher.utter_message(text=message)
