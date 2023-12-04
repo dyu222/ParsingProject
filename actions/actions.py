@@ -661,6 +661,6 @@ class ActionScaleRecipe(Action):
         # Note that both have to be changed
 
         dispatcher.utter_message(
-            text=f"Here are the updated ingredients for {scale} people:\n\n{ingredients_text}\n")
+            text=f"The ingredients are updated for {scale} people:\n")
 
         return []
